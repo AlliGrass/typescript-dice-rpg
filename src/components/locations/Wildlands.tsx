@@ -9,8 +9,6 @@ const Wildlands = () => {
 
     const healthMax = usePlayerStore((state: PlayerState) => state.healthMax)
 
-    
-    const {enemy} = useDefaults()
 
     return (
         <div style={{
@@ -24,7 +22,7 @@ const Wildlands = () => {
             </div>
             <div>
                 <h2>Enemy</h2>
-                <p>{enemy.health} / 10</p>
+                <p>10 / 10</p>
             </div>
         </div>
     )

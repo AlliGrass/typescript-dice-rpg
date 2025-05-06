@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 // import { usePlayer } from "../contexts/PlayerContext";
-import { LocationName } from "../types/Location.types";
+import { useDiceStore } from "../stores/useDiceStore";
+import { LocationNames } from "../types/Location.types";
 
 interface ActionBarProp {
-    location: LocationName
+    location: LocationNames
 }
 
 
 const ActionBar = ({location}: ActionBarProp) => {
 
     // const { gatherMaterial } = usePlayer()
+    const { checkActionAttempt } = useDiceStore()
 
     type ActionBarButtons =  {
         title: string,
@@ -25,6 +27,13 @@ const ActionBar = ({location}: ActionBarProp) => {
     //     gatherMaterial("wood", 1)
     // }
 
+    const [checkAttempt, setCheckAttempt] = useState<string>("")
+
+
+    const attemptAction = () => {
+        const value = checkActionAttempt(70,10)
+        setCheckAttempt(value? "Hit" : " Miss")
+    }
 
 
 
@@ -50,7 +59,7 @@ const ActionBar = ({location}: ActionBarProp) => {
                     {
                         title: 'Attack',
                         active: true,
-                        action: templateFunction, 
+                        action: attemptAction, 
                     }
                 ]
             case 'wilderness':
@@ -99,7 +108,7 @@ const ActionBar = ({location}: ActionBarProp) => {
                     {
                         title: "Start Fire",
                         active: true,
-                        action: templateFunction
+                        action: attemptAction
                     },
                     {
                         title: "Craft",
@@ -153,6 +162,7 @@ const ActionBar = ({location}: ActionBarProp) => {
     return (
         <div>
             <h2>Action Bar</h2>
+            <p>{checkAttempt}</p>
 
             {
                 actionButtons.map((buttonInfo, index) => (

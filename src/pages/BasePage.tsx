@@ -2,13 +2,14 @@ import { useState } from "react"
 import Woodlands from "../components/locations/Woodlands"
 import Wildlands from "../components/locations/Wildlands"
 import ActionBar from "../components/ActionBar"
-import { LocationElement, LocationName } from "../types/Location.types"
+import { LocationElement, LocationNames } from "../types/Location.types"
 import { PlayerState, usePlayerStore } from "../stores/usePlayerStore"
 import { DiceRollType, useDiceStore } from "../stores/useDiceStore"
 import Wilderness from "../components/locations/Wilderness"
 import Mine from "../components/locations/Mine"
 import Home from "../components/locations/Home"
 import River from "../components/locations/River"
+import Profile from "../components/Profile"
 
 
 
@@ -16,11 +17,11 @@ import River from "../components/locations/River"
 
 const BasePage = () => {
 
-    
+    const [profileVisibility, setProfileVisibility] = useState<boolean>(false)
 
-    const [currentLocation, setCurrentLocation] = useState<LocationName>("wildlands")
+    const [currentLocation, setCurrentLocation] = useState<LocationNames>("wildlands")
 
-    const locations: Record<LocationName, LocationElement> = {
+    const locations: Record<LocationNames, LocationElement> = {
         woodlands: <Woodlands/>,
         wildlands: <Wildlands/>,
         wilderness: <Wilderness/>,
@@ -56,6 +57,10 @@ const BasePage = () => {
         gatherMaterial()
     }
 
+    const toggleProfile = () => {
+        setProfileVisibility(!profileVisibility)
+    }
+
     
 
     return (
@@ -83,7 +88,7 @@ const BasePage = () => {
                 <div style={{
                     'border': 'solid blue',
                 }}>
-                    <button>Profile</button>
+                    <button onClick={toggleProfile}>Profile</button>
                 </div>
             </section>
             <section style={{
@@ -100,14 +105,6 @@ const BasePage = () => {
                 
                 <ActionBar location={currentLocation}/>
 
-
-                <div>
-                    <h1>Action Board</h1>
-
-                    <button onClick={changeHealth}>Attack</button>
-                    <button onClick={gainWood}>Gain Wood</button>
-                    <button>Reset Action</button>
-                </div>
                 <div>
                     <h1>Change Location</h1>
                     <button onClick={()=> {setCurrentLocation("wildlands")}}>Wildlands</button>
@@ -120,7 +117,7 @@ const BasePage = () => {
                 </div>
 
                 
-                {/* <section style={{
+                <section style={{
                     'display': profileVisibility? "block" : "none",
                     'position': 'fixed',
                     'top' : '50%', 
@@ -130,32 +127,8 @@ const BasePage = () => {
                     'border': 'solid red',
                     'padding': '35px',
                 }}>
-                    <h1>Level {playerProfile.level}</h1>
-                    <span>EXP: {playerProfile.exp}</span>
-                    <div>
-                        <div style={{
-                            'display': 'flex',
-                            'justifyContent': 'space-evenly',
-                        }}>
-                            <h2>Health - {playerProfile.healthMax}</h2> 
-                            <button style={{'display': levelUpVisibility? "block" : "none",}} onClick={()=> {levelUpSkill("health")}}>Up</button>
-
-                        </div>
-                        <div style={{
-                            'display': 'flex',
-                            'justifyContent': 'space-evenly',
-                        }}>
-                            <h2>Strength - {playerProfile.strength}</h2> 
-                            <button style={{'display': levelUpVisibility? "block" : "none",}} onClick={()=> {levelUpSkill("strength")}}>Up</button>
-
-                        </div>
-                        
-                    </div>
-                    <div>
-                        <button onClick={toggleProfile}>Close</button>
-                        <button onClick={activateLevelUp}>Level Up</button>
-                    </div>
-                </section> */}
+                    <Profile  visibility={ toggleProfile }/>
+                </section>
             </section>
 
 
