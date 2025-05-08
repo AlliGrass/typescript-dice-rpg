@@ -13,10 +13,7 @@ export const useDiceStore = create<DiceRollType>((set) => ({
     cpuDiceResult: 0,
     rollDice: (notation, playerRoll) => set(produce(state => {state[playerRoll? "diceResult" : "cpuDiceResult"] = Math.floor(Math.random() * notation) + 1})),
     checkActionAttempt: (successDC, modifiers) => {
-        const result = Math.floor(Math.random() * 100) + (modifiers? modifiers + 1 : 1)
-
-        return result >= successDC? true : false
+        const result = Math.floor(Math.random() * 100) + (modifiers? 1 - modifiers : 1)
+        return result <= successDC? true : false
     } 
-    // checkActionAttempt: rollDice(100, false) => store result to either be calculated externally or done within this store
-
 }))

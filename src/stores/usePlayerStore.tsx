@@ -1,13 +1,10 @@
 import { produce } from "immer";
 import { create } from "zustand";
+import { MaterialType } from "../types/Resources.types";
 
-type MaterialsType = {
-    wood: number,
-    stone: number,
-}
 
 type InventoryType = {
-    materials: MaterialsType, 
+    materials: MaterialType, 
     items: string[],
     equipped: {
         helmet: string,
@@ -24,7 +21,7 @@ export type PlayerState = {
     strength: number,
     inventory: InventoryType,
     updateHealth: () => void,
-    gatherMaterial: () => void
+    gatherMaterial: (material: string, amount: number) => void
 }
 
 export const usePlayerStore = create<PlayerState>((set) => ({
@@ -35,6 +32,7 @@ export const usePlayerStore = create<PlayerState>((set) => ({
     strength: 1, 
     inventory: {
         materials: {
+            sticks: 0,
             wood: 0,
             stone: 0,
         }, 
@@ -46,6 +44,6 @@ export const usePlayerStore = create<PlayerState>((set) => ({
         },
     },
     updateHealth: () => set(produce(profile => { profile.healthCurrent -= 1})),
-    gatherMaterial: () => set(produce(profile => { profile.inventory.materials.wood += 1}))
+    gatherMaterial: (material, amount) => set(produce(profile => { profile.inventory.materials[material] += amount}))
 }))
 

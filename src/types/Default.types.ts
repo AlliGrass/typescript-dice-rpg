@@ -1,7 +1,8 @@
-import { LocationType, LocationNames } from "./Location.types"
+import { LocationType, LocationNameType } from "./Location.types"
+import { MaterialType } from "./Resources.types"
 
 
-type DefaultLocationType = Record<LocationNames, LocationType>
+type DefaultLocationType = Record<LocationNameType, LocationType>
 
 type ClassNames = "standard"
 
@@ -21,7 +22,8 @@ export type DefaultContextType = {
             locations: DefaultLocationType
         },
         player: {
-            classes: DefaultClassType   
+            classes: DefaultClassType,
+
         }, 
         // enemy: {
         //     type: {
@@ -31,7 +33,7 @@ export type DefaultContextType = {
         // },
     },
     base: {
-        toHit: number,
+        materials: MaterialType
     },
     notation: {
         // attack: {

@@ -1,14 +1,10 @@
 import { useState } from "react"
-import Woodlands from "../components/locations/Woodlands"
-import Wildlands from "../components/locations/Wildlands"
+
 import ActionBar from "../components/ActionBar"
-import { LocationElement, LocationNames } from "../types/Location.types"
-import { PlayerState, usePlayerStore } from "../stores/usePlayerStore"
+import { PageLocations, LocationNameType } from "../types/Location.types"
+// import { PlayerState, usePlayerStore } from "../stores/usePlayerStore"
 import { DiceRollType, useDiceStore } from "../stores/useDiceStore"
-import Wilderness from "../components/locations/Wilderness"
-import Mine from "../components/locations/Mine"
-import Home from "../components/locations/Home"
-import River from "../components/locations/River"
+
 import Profile from "../components/Profile"
 
 
@@ -19,43 +15,25 @@ const BasePage = () => {
 
     const [profileVisibility, setProfileVisibility] = useState<boolean>(false)
 
-    const [currentLocation, setCurrentLocation] = useState<LocationNames>("wildlands")
-
-    const locations: Record<LocationNames, LocationElement> = {
-        woodlands: <Woodlands/>,
-        wildlands: <Wildlands/>,
-        wilderness: <Wilderness/>,
-        mine: <Mine/>,
-        home: <Home/>,
-        river: <River/>
-    }
+    const [currentLocation, setCurrentLocation] = useState<LocationNameType>("wildlands")
 
 
-
-
-    // Global Variables
-
-    // Dice roll settings / result
-
-    // Profile
-
-    // const { gatherMaterial } = usePlayer()
 
     const diceResult = useDiceStore( (state: DiceRollType) => state.diceResult)
 
     const rollDice = useDiceStore( (state: DiceRollType) => state.rollDice)
 
-    const updateHealth = usePlayerStore( (state: PlayerState) => state.updateHealth)
+    // const updateHealth = usePlayerStore( (state: PlayerState) => state.updateHealth)
 
-    const gatherMaterial = usePlayerStore((state: PlayerState) => state.gatherMaterial)
+    // const gatherMaterial = usePlayerStore((state: PlayerState) => state.gatherMaterial)
 
-    const changeHealth = () => {
-        updateHealth()
-    }
+    // // const changeHealth = () => {
+    // //     updateHealth()
+    // // }
 
-    const gainWood = () => {
-        gatherMaterial()
-    }
+    // // const gainWood = () => {
+    // //     gatherMaterial()
+    // // }
 
     const toggleProfile = () => {
         setProfileVisibility(!profileVisibility)
@@ -98,10 +76,7 @@ const BasePage = () => {
                 'justifyContent': 'space-evenly',
             }}>
                 
-                {/* <Wildlands/> */}
-
-                    {/* <Wildlands/> */}
-                    {locations[currentLocation]}
+                {PageLocations[currentLocation]}
                 
                 <ActionBar location={currentLocation}/>
 
