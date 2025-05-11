@@ -22,8 +22,9 @@ I began learning TypeScript by wanting to remake my portfolio which included a P
 
 ## Development Notes
 ### Recently Implemented:
-- Complete state management across webpage.
-- Localised functions for cleaner component files
+- Inventory & Crafting Windows with responsive craft buttons based on available materials.
+- Crafting function that removes relevant materials ands crafted item to player inventory.
+- Action buttons dependent on relevant items to unlock access
 
 ### Incoming Development:
 - Fully localised types and interfaces to avoid cluttering component files.
@@ -37,7 +38,7 @@ I began learning TypeScript by wanting to remake my portfolio which included a P
 - (In depth) settings that the user can adjust to their liking.
 
 ### Current Limitations:
-- Not storing any data locally. Fully resets page and progress on page refresh.
+- Not storing any data locally on devices. Fully resets page and progress on refresh.
 - Lacking graphics are not intuitive to the average user.
 - UI not optimised for mobile devices.
 - Lacking in depth knowledge of the possibilities of TypeScript leads to the potential of inoptimal implementation of a feature.

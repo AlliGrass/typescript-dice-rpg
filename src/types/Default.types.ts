@@ -1,5 +1,5 @@
 import { LocationType, LocationNameType } from "./Location.types"
-import { MaterialType } from "./Resources.types"
+import { MaterialType } from "./Resource.types"
 
 
 type DefaultLocationType = Record<LocationNameType, LocationType>
@@ -32,16 +32,63 @@ export type DefaultContextType = {
         //     }
         // },
     },
-    base: {
-        materials: MaterialType
+    items: {
+        resources: {
+            // materials?
+        },
+        tools: {
+            stoneAxe: {
+                title: string,
+                type: string
+                crafting: {
+                    isCraftable: boolean,
+                    requiredItems: {
+                        [key: string]: number
+                    },
+                    craftingStation: boolean,
+                }
+            }
+            stonePickaxe: {
+                title: string,
+                type: string,
+                crafting: {
+                    isCraftable: boolean,
+                    requiredItems: {
+                        [key: string]: number
+                    },
+                    craftingStation: boolean,
+                }
+            }
+        },
     },
-    notation: {
-        // attack: {
-
-        // },
-        // skills: {
-
-        // },
-        classes: DefaultClassType
+    structures: {
+        home: {
+            fire: {
+                title: string,
+                requiredItems: {
+                    [key: string]: number
+                }
+            },
+            firePit: {
+                title: string,
+                requiredItems: {
+                    [key: string]: number
+                }
+            },
+        },
     }
+
+
+    // base: {
+    //     materials: MaterialType
+    // },
+    // notation: {
+    //     // attack: {
+
+    //     // },
+    //     // skills: {
+
+    //     // },
+    //     classes: DefaultClassType
+    // }
 }

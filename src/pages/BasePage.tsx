@@ -2,10 +2,11 @@ import { useState } from "react"
 
 import ActionBar from "../components/ActionBar"
 import { PageLocations, LocationNameType } from "../types/Location.types"
-// import { PlayerState, usePlayerStore } from "../stores/usePlayerStore"
+import { PlayerState, usePlayerStore } from "../stores/usePlayerStore"
 import { DiceRollType, useDiceStore } from "../stores/useDiceStore"
 
 import Profile from "../components/Profile"
+import InventoryWindow from "../components/InventoryWindow"
 
 
 
@@ -14,32 +15,33 @@ import Profile from "../components/Profile"
 const BasePage = () => {
 
     const [profileVisibility, setProfileVisibility] = useState<boolean>(false)
+    const [inventoryVisibility, setInventoryVisibility] = useState<boolean>(false)
 
     const [currentLocation, setCurrentLocation] = useState<LocationNameType>("wildlands")
 
-
-
     const diceResult = useDiceStore( (state: DiceRollType) => state.diceResult)
-
     const rollDice = useDiceStore( (state: DiceRollType) => state.rollDice)
-
-    // const updateHealth = usePlayerStore( (state: PlayerState) => state.updateHealth)
-
-    // const gatherMaterial = usePlayerStore((state: PlayerState) => state.gatherMaterial)
-
-    // // const changeHealth = () => {
-    // //     updateHealth()
-    // // }
-
-    // // const gainWood = () => {
-    // //     gatherMaterial()
-    // // }
 
     const toggleProfile = () => {
         setProfileVisibility(!profileVisibility)
     }
+    const toggleInventory = () => {
+        setInventoryVisibility(!inventoryVisibility)
+    }
 
-    
+    const {inventoryAddDebugTestItems, inventoryAddDebugTestMaterials} = usePlayerStore()
+
+
+    const debugTestFunction = () => {
+        inventoryAddDebugTestItems()
+    }
+
+    const playerInventory = usePlayerStore((state: PlayerState) => state.inventory)
+
+
+    const showInventory = () => {
+        console.log(playerInventory)
+    }
 
     return (
         <div style={{
@@ -62,6 +64,8 @@ const BasePage = () => {
                     <h3>Dice result</h3>
                     <h2>{diceResult}</h2>
                     <button onClick={() => {rollDice(100, true)}}>Roll Dice</button>
+                    <button onClick={debugTestFunction}>Add Debug/Test Items</button>
+                    <button onClick={toggleInventory}>Show Inventory</button>
                 </div>
                 <div style={{
                     'border': 'solid blue',
@@ -104,6 +108,19 @@ const BasePage = () => {
                 }}>
                     <Profile  visibility={ toggleProfile }/>
                 </section>
+                <section style={{
+                    'display': inventoryVisibility? "block" : "none",
+                    'position': 'fixed',
+                    'top' : '50%', 
+                    'left' : '50%',
+                    'transform' : 'translate(-50%, -50%)',
+                    'background': 'gray',
+                    'border': 'solid red',
+                    'padding': '35px',
+                }}>
+                    <InventoryWindow/>
+                </section>
+
             </section>
 
 

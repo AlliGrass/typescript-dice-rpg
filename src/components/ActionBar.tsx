@@ -1,19 +1,23 @@
 import { useEffect, useState } from "react";
 import { LocationNameType } from "../types/Location.types";
 import { useActionButtons } from "../hooks/useActionButtons";
-import { DefaultData } from "../contexts/data/DefaultData";
+import { useDefaults } from "../contexts/DefaultsContext";
+import { PlayerState, usePlayerStore } from "../stores/usePlayerStore";
 
 interface ActionBarProp {
     location: LocationNameType
 }
 
 const ActionBar = ({location}: ActionBarProp) => {
-    const defaultLocationButtons = DefaultData.initial.page.locations
+    const { initial: { page: { locations } } } = useDefaults()
+    const playerInventory = usePlayerStore( (state: PlayerState) => state.inventory)
+
 
     type ActionBarButtons =  {
         title: string,
         active: boolean,
-        action: string
+        action: string,
+        variable?: any[],
     }
 
     const buttonActions = useActionButtons()
@@ -21,18 +25,28 @@ const ActionBar = ({location}: ActionBarProp) => {
     const [actionButtons, setActionButtons] = useState<ActionBarButtons[]>([])
 
     useEffect(() => {
-        setActionButtons(defaultLocationButtons[location].buttons)
-    }, [location])
+        setActionButtons(locations[location].buttons)
+    }, [location]) // change to memo/callback later (?)
+
+
 
     return (
         <div>
             <h2>Action Bar</h2>
             {
-                actionButtons.map((buttonInfo, index) => (
-                    <button key={index} onClick={buttonActions[buttonInfo.action]} disabled={!buttonInfo.active}>
+                actionButtons.map((buttonInfo, index) => {
+                    const buttonActive = buttonInfo.active ? true : playerInventory[buttonInfo.requirement.type].includes(buttonInfo.requirement.require)? true : false
+
+                    return (
+                    <button 
+                        key={index} 
+                        onClick={() => buttonInfo.variable? buttonActions[buttonInfo.action](buttonInfo.variable) : buttonActions[buttonInfo.action]()} 
+                        disabled={!buttonActive}
+                    >
                         {buttonInfo.title}
                     </button>
-                ))
+                    )
+                })
             }
         </div>
     )

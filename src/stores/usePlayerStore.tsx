@@ -1,10 +1,11 @@
 import { produce } from "immer";
 import { create } from "zustand";
-import { MaterialType } from "../types/Resources.types";
+import { MaterialType } from "../types/Resource.types";
 
 
 type InventoryType = {
     materials: MaterialType, 
+    tool: string[]
     items: string[],
     equipped: {
         helmet: string,
@@ -21,7 +22,10 @@ export type PlayerState = {
     strength: number,
     inventory: InventoryType,
     updateHealth: () => void,
-    gatherMaterial: (material: string, amount: number) => void
+    inventoryUpdateMaterial: (material: string, amount: number) => void,
+    inventoryAddDebugTestMaterials: () => void,
+    inventoryAddDebugTestItems: () => void,
+    addItem: (addedItem: string, materialCost: [key:string]) => void
 }
 
 export const usePlayerStore = create<PlayerState>((set) => ({
@@ -32,10 +36,11 @@ export const usePlayerStore = create<PlayerState>((set) => ({
     strength: 1, 
     inventory: {
         materials: {
-            sticks: 0,
+            stick: 0,
             wood: 0,
             stone: 0,
         }, 
+        tool: [],
         items: [],
         equipped: {
             helmet: "",
@@ -44,6 +49,14 @@ export const usePlayerStore = create<PlayerState>((set) => ({
         },
     },
     updateHealth: () => set(produce(profile => { profile.healthCurrent -= 1})),
-    gatherMaterial: (material, amount) => set(produce(profile => { profile.inventory.materials[material] += amount}))
+    inventoryUpdateMaterial: (material, amount) => set(produce(profile => { profile.inventory.materials[material] += amount})),
+    inventoryAddDebugTestMaterials: () => set(produce(profile => {profile.inventory.materials = {stick: 3, wood: 0, stone: 2}})),
+    inventoryAddDebugTestItems: () => set(produce(profile => {profile.inventory.tool = ["stoneAxe", "stonePickaxe"]})),
+    addItem: (addedItem, materialCost) => {
+        set(produce(profile => {profile.inventory.materials.stick -= materialCost.stick}))
+        set(produce(profile => {profile.inventory.materials.stone -= materialCost.stone}))
+        set(produce(profile => {profile.inventory.tool.push(addedItem)}))
+        
+    }
 }))
 

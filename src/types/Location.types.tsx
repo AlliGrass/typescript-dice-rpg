@@ -14,7 +14,12 @@ export type LocationType = {
     {
         title: string,
         active: boolean,
-        action: string
+        requirement?: {
+            type: string,
+            require: string
+        },
+        action: string,
+        variable?: any[],
     }[]
 }
 
