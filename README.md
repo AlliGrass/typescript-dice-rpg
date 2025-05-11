@@ -1,6 +1,12 @@
 # Dice RPG
 A webapp game that relies on dice rolls to progress through the game. Currently only at the stage which is building the core fundamentals for the web application. In future it will be a fully functional web-based game that stores users information with cookies and cache so that the user can close the window without worrying of losing their progress. May be elements of idle mechanics which rely on type passing and other common mechanics within games.
 
+## Tech Stack
+### Languages: TypeScript, HTML
+### Frameworks: React
+### State Management: Zustand, Immer
+### Development Environment: Linux (Ubuntu)
+
 ## Overview
 ### Purpose: Expanding My Skillset
 I have mostly worked with JavaScript before and have been curious of branching out to TypeScript for a time. This project is a perfect blend that encourages me to understand key concepts and functionalities of TypeScript in a way that I am motivated to engage with.
@@ -14,11 +20,7 @@ I began learning TypeScript by wanting to remake my portfolio which included a P
 - A location section of the page which can change depending on user input with relevent information relating to the location. 
 - Action buttons coincidentally change with the location. Able to dynamically enable certain buttons. (Minor yet noticable delay when changing locations between the location component and the relevent list of action buttons)
 - A dice state that manages dice rolls and results which will be a key component to future mechanics for the game.
-## Tech Stack
-### Languages: TypeScript, HTML
-### Frameworks: React
-### State Management: Zustand, Immer
-### Development Environment: Linux (Ubuntu)
+
 
 ## Development Notes
 ### Recently Implemented:
