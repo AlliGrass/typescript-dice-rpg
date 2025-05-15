@@ -4,9 +4,9 @@ import { MaterialType } from "../types/Resource.types";
 
 
 type InventoryType = {
-    materials: MaterialType, 
+    material: MaterialType, 
     tool: string[]
-    items: string[],
+    item: string[],
     equipped: {
         helmet: string,
         clothes: string,
@@ -33,7 +33,7 @@ export type PlayerState = {
     inventoryUpdateMaterial: (material: string, amount: number) => void,
     inventoryAddDebugTestMaterials: () => void,
     inventoryAddDebugTestItems: () => void,
-    addItem: (addedItem: string, materialCost: [key:string]) => void
+    // addItem: (addedItem: string, materialCost: [key:string]) => void
 }
 
 export const usePlayerStore = create<PlayerState>((set) => ({
@@ -43,13 +43,47 @@ export const usePlayerStore = create<PlayerState>((set) => ({
     healthCurrent: 10,
     strength: 1, 
     inventory: {
-        materials: {
-            stick: 0,
-            wood: 0,
-            stone: 0,
+        material: {
+            wood: {
+                stick: 0,
+                log: {
+                    pine: 0,
+                    oak: 0,
+                    walnut: 0,
+                    ash: 0
+                },
+                plank: {
+                    pine: 0,
+                    oak: 0,
+                    walnut: 0,
+                    ash: 0
+                }
+            },
+            mineral: {
+                stone: 0,
+                coal: 0,
+                ore: {
+                    copper: 0,
+                    tin: 0,
+                    iron: 0,
+                    cobalt: 0,
+                    tungsten: 0
+                },
+                ingot: {
+                    copper: 0,
+                    bronze: 0,
+                    iron: 0,
+                    tungsten: 0
+                }
+            },
+            forage: {
+                clay: 0,
+                straw: 0
+            }
+
         }, 
         tool: [],
-        items: [],
+        item: [],
         equipped: {
             helmet: "",
             clothes: "",
@@ -59,7 +93,8 @@ export const usePlayerStore = create<PlayerState>((set) => ({
     structuralUnlocks: {
         home: {
             firePit: false,
-            craftingBench: false
+            craftingBench: false,
+            furnace: false,
         },
         dock: {
 
@@ -69,15 +104,14 @@ export const usePlayerStore = create<PlayerState>((set) => ({
     inventoryUpdateMaterial: (material, amount) => set(produce(profile => { profile.inventory.materials[material] += amount})),
     inventoryAddDebugTestMaterials: () => set(produce(profile => {profile.inventory.materials = {stick: 3, wood: 0, stone: 2}})),
     inventoryAddDebugTestItems: () => set(produce(profile => {profile.inventory.tool = ["stoneAxe", "stonePickaxe"]})),
-    addItem: (addedItem, materialCost) => {
+    // addItem: (addedItem, materialCost) => {
 
-
-        Object.entries(materialCost).map((material, amount) => {
-            return set(produce(profile => {profile.inventory.materials[material] -= amount}))
-        })
+    //     Object.entries(materialCost).map((material, amount) => {
+    //         return set(produce(profile => {profile.inventory.materials[material] -= amount}))
+    //     })
         
-        set(produce(profile => {profile.inventory.tool.push(addedItem)}))
+    //     set(produce(profile => {profile.inventory.tool.push(addedItem)}))
         
-    }
+    // }
 }))
 

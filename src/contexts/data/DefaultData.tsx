@@ -176,10 +176,50 @@ export const DefaultData = {
                             action: "gatherMaterial",
                             requirement: {
                                 type: "tool",
-                                require: "stonePickaxe"
+                                require: "stoneAxe"
                             },
                             variable: ["wood"],
-                        }
+                        },
+                        {
+                            title: "Gather Pine",
+                            active: false,
+                            action: "gatherMaterial",
+                            requirement: {
+                                type: "tool",
+                                require: "stoneAxe"
+                            },
+                            variable: ["pine"]
+                        },
+                        {
+                            title: "Gather Oak",
+                            active: false,
+                            action: "gatherMaterial",
+                            requirement: {
+                                type: "tool",
+                                require: "stoneAxe"
+                            },
+                            variable: ["oak"]
+                        },
+                        {
+                            title: "Gather Walnut",
+                            active: false,
+                            action: "gatherMaterial",
+                            requirement: {
+                                type: "tool",
+                                require: "stoneAxe"
+                            },
+                            variable: ["walnut"]
+                        },
+                        {
+                            title: "Gather Ash",
+                            active: false,
+                            action: "gatherMaterial",
+                            requirement: {
+                                type: "tool",
+                                require: "stoneAxe"
+                            },
+                            variable: ["ash"]
+                        },
                     ]
                 }
             }
@@ -197,6 +237,15 @@ export const DefaultData = {
     },
     items: {
         resources: {
+            itemName: {
+                path: "", // ? ["path1", "path2"] ??? "materials.wood.oaklog" ?????
+                properties: { // item meta
+                    title: "Name?"
+                },
+            },
+
+            
+            // account for new log/plank ore/ingots setup (WRITE ITEM PATHS FOR INVENTORY AND CRAFTING)
             clay: {
                 title: "Clay",
                 type: "forage", // ?

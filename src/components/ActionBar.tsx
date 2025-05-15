@@ -9,7 +9,7 @@ interface ActionBarProp {
     craftingVisibility: () => void 
 }
 
-const ActionBar = ({location}: ActionBarProp, craftingVisibility: ) => {
+const ActionBar = ({location, craftingVisibility}: ActionBarProp) => {
     const { initial: { page: { locations } } } = useDefaults()
     const playerInventory = usePlayerStore( (state: PlayerState) => state.inventory)
 

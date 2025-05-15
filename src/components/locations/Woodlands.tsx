@@ -1,8 +1,8 @@
 import { PlayerState, usePlayerStore } from "../../stores/usePlayerStore";
 
 const Woodlands = () => {
-    const stick = usePlayerStore((state: PlayerState) => state.inventory.materials.stick)
-    const wood = usePlayerStore((state: PlayerState) => state.inventory.materials.wood)
+    // const stick = usePlayerStore((state: PlayerState) => state.inventory.materials.stick)
+    // const wood = usePlayerStore((state: PlayerState) => state.inventory.materials.wood)
 
 
     return (
@@ -21,8 +21,8 @@ const Woodlands = () => {
                     <span>0%</span>
                 </div>
             </div>
-            <h2>Current Sticks: {stick}</h2>
-            <h2>Current Wood: {wood}</h2>
+            {/* <h2>Current Sticks: {stick}</h2>
+            <h2>Current Wood: {wood}</h2> */}
             
         </div>
     )

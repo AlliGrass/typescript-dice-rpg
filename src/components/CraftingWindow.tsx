@@ -15,7 +15,7 @@ const CraftingWindow = () => {
             <h1>Crafting Tools</h1>
             <button onClick={() => console.log(playerInventory)}>show inventory</button>
             {
-                Object.entries(playerInventory.materials).map(([key, value]) => <h3>{key +": " + value}</h3>)
+                Object.entries(playerInventory.material).map(([key, value]) => <h3>{key +": " + value}</h3>)
             }
             {Object.entries(tools).map(([itemObject, itemObjectValues]) => {
                 // const [craftingAvailable, setCraftingAvailable] = useState<boolean>()

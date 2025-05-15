@@ -19,15 +19,16 @@ I began learning TypeScript by wanting to remake my portfolio which included a P
 ### Core Features: 
 - A location section of the page which can change depending on user input with relevent information relating to the location. 
 - Action buttons coincidentally change with the location. Able to dynamically enable certain buttons. (Minor yet noticable delay when changing locations between the location component and the relevent list of action buttons)
-- A dice state that manages dice rolls and results which will be a key component to future mechanics for the game.
+- A dice zustand store that manages dice rolls and results which will be a key component to future mechanics for the game.
 - Crafting and progression based on key circumstances. (Player has specific item in inventory)
 
 
 ## Development Notes
 ### Recently Implemented:
-- Inventory & Crafting Windows with responsive craft buttons based on available materials.
-- Crafting function that removes relevant materials ands crafted item to player inventory.
-- Action buttons dependent on relevant items to unlock access
+- **Crafting functionality currently suspended. Reconstructing material types.**
+- ~~Inventory & Crafting Windows with responsive craft buttons based on available materials.~~
+- ~~Crafting function that removes relevant materials ands crafted item to player inventory.~~
+- Action buttons dependent on relevant items to enable.
 
 ### Known Issues & Solutions
 - **Type Inference Warnings**: 
@@ -36,6 +37,8 @@ I began learning TypeScript by wanting to remake my portfolio which included a P
   - Plan: Explicit typing post-prototype phase.
 
 ### Incoming Development:
+- Functional crafting system
+- Unlockable actions and locations
 - Fully localised types and interfaces to avoid cluttering component files.
 - Fully optimized base level functions. (Scalable Friendly)
 - Player leveling system / meaningful progression.

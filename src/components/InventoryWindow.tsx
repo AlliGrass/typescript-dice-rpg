@@ -12,7 +12,6 @@ const InventoryWindow = () => {
             <h2>Tools</h2>
             {
                 Object.entries(playerInventory.tool).map(([key, value]) => {
-                    console.log(playerInventory.tool)
                     return <h3>{key + ": " + value}</h3>
                 })
             }
@@ -20,8 +19,18 @@ const InventoryWindow = () => {
             <p>items</p>
             <h2>Resources</h2>
             {
-                Object.entries(playerInventory.materials).map(([key, value]) => {
-                    return <h3>{key +": " + value}</h3>
+                Object.entries(playerInventory.material).map(([key, value]) => {
+                    return (
+                        <>
+                            <h3>{key}</h3>
+                            {
+                                Object.entries(value).map(([key, value]) => {
+                                return <p>{key + ":" + value}</p>
+                            })
+                            }
+                        </>
+
+                    )
                 })
             }
         </div>
