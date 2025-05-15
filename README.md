@@ -45,6 +45,7 @@ I began learning TypeScript by wanting to remake my portfolio which included a P
 - Customisability for the user. Includes the potential for character classes.
 - Immersive assets. (Images, Audio)
 - (In depth) settings that the user can adjust to their liking.
+- Home base customisation (UI intensive)
 
 ### Current Limitations:
 - Not storing any data locally on devices. Fully resets page and progress on refresh.

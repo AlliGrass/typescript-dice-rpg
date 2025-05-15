@@ -14,7 +14,12 @@ import InventoryWindow from "../components/InventoryWindow"
 
 const BasePage = () => {
 
-    const [profileVisibility, setProfileVisibility] = useState<boolean>(false)
+    const [pageComponentVisibility, setPageComponentVisibility] = useState({
+        profile: false,
+        inventory: false,
+        crafting: false
+    })
+
     const [inventoryVisibility, setInventoryVisibility] = useState<boolean>(false)
 
     const [currentLocation, setCurrentLocation] = useState<LocationNameType>("wildlands")
@@ -23,11 +28,20 @@ const BasePage = () => {
     const rollDice = useDiceStore( (state: DiceRollType) => state.rollDice)
 
     const toggleProfile = () => {
-        setProfileVisibility(!profileVisibility)
+        setPageComponentVisibility((pageComponents) => ({...pageComponents, profile: !pageComponents.profile}))
+        // setProfileVisibility(!profileVisibility)
     }
     const toggleInventory = () => {
-        setInventoryVisibility(!inventoryVisibility)
+        setPageComponentVisibility((pageComponents) => ({...pageComponents, inventory: !pageComponents.inventory}))
     }
+
+    const toggleCrafting = () => {
+        setPageComponentVisibility((pageComponents) => ({...pageComponents, crafting: !pageComponents.crafting}))
+    }
+
+    // const toggleComponentWindow = (component: string) => {
+    //     setPageComponentVisibility((pageComponents) => ({...pageComponents, [component]: !pageComponents[component]}))
+    // }
 
     const {inventoryAddDebugTestItems, inventoryAddDebugTestMaterials} = usePlayerStore()
 
@@ -36,12 +50,7 @@ const BasePage = () => {
         inventoryAddDebugTestItems()
     }
 
-    const playerInventory = usePlayerStore((state: PlayerState) => state.inventory)
 
-
-    const showInventory = () => {
-        console.log(playerInventory)
-    }
 
     return (
         <div style={{
@@ -82,7 +91,7 @@ const BasePage = () => {
                 
                 {PageLocations[currentLocation]}
                 
-                <ActionBar location={currentLocation}/>
+                <ActionBar location={currentLocation} craftingVisibility={ toggleCrafting }/>
 
                 <div>
                     <h1>Change Location</h1>
@@ -97,7 +106,7 @@ const BasePage = () => {
 
                 
                 <section style={{
-                    'display': profileVisibility? "block" : "none",
+                    'display': pageComponentVisibility.profile? "block" : "none",
                     'position': 'fixed',
                     'top' : '50%', 
                     'left' : '50%',
@@ -109,7 +118,7 @@ const BasePage = () => {
                     <Profile  visibility={ toggleProfile }/>
                 </section>
                 <section style={{
-                    'display': inventoryVisibility? "block" : "none",
+                    'display': pageComponentVisibility.inventory? "block" : "none",
                     'position': 'fixed',
                     'top' : '50%', 
                     'left' : '50%',

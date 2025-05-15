@@ -21,6 +21,14 @@ export type PlayerState = {
     healthCurrent: number,
     strength: number,
     inventory: InventoryType,
+    structuralUnlocks: {
+        home: {
+            [key: string]: boolean
+        },
+        dock: {
+            [key: string]: boolean
+        }
+    },
     updateHealth: () => void,
     inventoryUpdateMaterial: (material: string, amount: number) => void,
     inventoryAddDebugTestMaterials: () => void,
@@ -48,13 +56,26 @@ export const usePlayerStore = create<PlayerState>((set) => ({
             shoes: "",
         },
     },
+    structuralUnlocks: {
+        home: {
+            firePit: false,
+            craftingBench: false
+        },
+        dock: {
+
+        }
+    },
     updateHealth: () => set(produce(profile => { profile.healthCurrent -= 1})),
     inventoryUpdateMaterial: (material, amount) => set(produce(profile => { profile.inventory.materials[material] += amount})),
     inventoryAddDebugTestMaterials: () => set(produce(profile => {profile.inventory.materials = {stick: 3, wood: 0, stone: 2}})),
     inventoryAddDebugTestItems: () => set(produce(profile => {profile.inventory.tool = ["stoneAxe", "stonePickaxe"]})),
     addItem: (addedItem, materialCost) => {
-        set(produce(profile => {profile.inventory.materials.stick -= materialCost.stick}))
-        set(produce(profile => {profile.inventory.materials.stone -= materialCost.stone}))
+
+
+        Object.entries(materialCost).map((material, amount) => {
+            return set(produce(profile => {profile.inventory.materials[material] -= amount}))
+        })
+        
         set(produce(profile => {profile.inventory.tool.push(addedItem)}))
         
     }

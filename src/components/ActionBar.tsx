@@ -5,10 +5,11 @@ import { useDefaults } from "../contexts/DefaultsContext";
 import { PlayerState, usePlayerStore } from "../stores/usePlayerStore";
 
 interface ActionBarProp {
-    location: LocationNameType
+    location: LocationNameType,
+    craftingVisibility: () => void 
 }
 
-const ActionBar = ({location}: ActionBarProp) => {
+const ActionBar = ({location}: ActionBarProp, craftingVisibility: ) => {
     const { initial: { page: { locations } } } = useDefaults()
     const playerInventory = usePlayerStore( (state: PlayerState) => state.inventory)
 
@@ -17,6 +18,10 @@ const ActionBar = ({location}: ActionBarProp) => {
         title: string,
         active: boolean,
         action: string,
+        requirement?: {
+            type: string,
+            require: string
+        },
         variable?: any[],
     }
 
@@ -35,8 +40,9 @@ const ActionBar = ({location}: ActionBarProp) => {
             <h2>Action Bar</h2>
             {
                 actionButtons.map((buttonInfo, index) => {
-                    const buttonActive = buttonInfo.active ? true : playerInventory[buttonInfo.requirement.type].includes(buttonInfo.requirement.require)? true : false
+                    const requirementFulfilled = buttonInfo.requirement? playerInventory[buttonInfo.requirement.type].includes(buttonInfo.requirement.require): false
 
+                    const buttonActive = buttonInfo.active ? true : requirementFulfilled
                     return (
                     <button 
                         key={index} 

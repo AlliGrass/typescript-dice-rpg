@@ -17,22 +17,26 @@ export const DefaultData = {
                         },
                         {
                             title: "Build Structure",
-                            active: false,
-                            requirement: {
-                                type: "structure",
-                                require: "firePit"
-                            },
+                            active: true,
                             action: "templateFunction"
                         },
                         {
                             title: "Expand",
                             active: false,
+                            requirement: {
+                                type: "tool", // structure
+                                require: "firePit"
+                            },
                             action: "templateFunction"
                         },
                         {
                             title: "Merchant",
                             active: false,
-                            action: "templateFunction"
+                            action: "templateFunction",
+                            requirement: {
+                                type: "tool", // unknown`
+                                require: "unknown"
+                            }
                         }
                     ]
                 },
@@ -48,39 +52,39 @@ export const DefaultData = {
                         {
                             title: "Coal",
                             active: false,
+                            action: "gatherMaterial",
                             requirement: {
                                 type: "tool",
                                 require: "stonePickaxe"
                             },
-                            action: "gatherMaterial",
                             variable: ["coal"],
                         },
                         {
                             title: "Copper",
                             active: false,
+                            action: "gatherMaterial",
                             requirement: {
                                 type: "tool",
                                 require: "stonePickaxe"
                             },
-                            action: "gatherMaterial",
                             variable: ["copper"],
                         },
                         
                         {
                             title: "Iron",
                             active: false,
+                            action: "gatherMaterial",
                             requirement: {
                                 type: "tool",
                                 require: ""
                             },
-                            action: "gatherMaterial",
                             variable: ["iron"]
                         },
                         {
                             title: "Tungsten",
                             active: false,
                             requirement: {
-                                title: "tool",
+                                type: "tool",
                                 require: ""
                             },
                             variable: ["tungsten"]
@@ -89,7 +93,7 @@ export const DefaultData = {
                             title: "Diamond",
                             active: false,
                             requirement: {
-                                title: "tool",
+                                type: "tool",
                                 require: ""
                             },
                             variable: ["diamond"]
@@ -102,17 +106,29 @@ export const DefaultData = {
                         {
                             title: "Catch Fish",
                             active: false,
-                            action: "templateFunction"
+                            action: "templateFunction",
+                            requirement: {
+                                type: "tool",
+                                require: "fishingRod"
+                            },
                         },
                         {
                             title: "Build Dock",
                             active: false,
-                            action: "templateFunction"
+                            action: "templateFunction",
+                            requirement: {
+                                type: "tool", // structure
+                                require: ""
+                            },
                         },
                         {
                             title: "Shipping Merchant",
                             active: false,
-                            action: "templateFunction"
+                            action: "templateFunction",
+                            requirement: {
+                                type: "tool", // unknown
+                                require: ""
+                            },
                         }
                     ]
                 },
@@ -120,14 +136,18 @@ export const DefaultData = {
                     title: "Wilderness",
                     buttons: [
                         {
-                            title: "Scavenge for Food",
+                            title: "Scavenge for Resources",
                             active: true,
                             action: "templateFunction",
                         },
                         {
                             title: "Hunt for Food",
                             active: false,
-                            action: "templateFunction"
+                            action: "templateFunction",
+                            requirement: {
+                                type: "tool",
+                                require: ""
+                            },
                         }
                     ]
                 },
@@ -154,6 +174,10 @@ export const DefaultData = {
                             title: 'Gather Wood',
                             active: false,
                             action: "gatherMaterial",
+                            requirement: {
+                                type: "tool",
+                                require: "stonePickaxe"
+                            },
                             variable: ["wood"],
                         }
                     ]
@@ -173,6 +197,11 @@ export const DefaultData = {
     },
     items: {
         resources: {
+            clay: {
+                title: "Clay",
+                type: "forage", // ?
+             
+            },
             stick: {
                 title: "Stick",
                 type: "wood",
@@ -215,6 +244,7 @@ export const DefaultData = {
                 type: "mineral",
                 processing: {
                     isProcessable: false
+                    // hammar, smelt
                 }
             },
             tin: {
@@ -267,6 +297,7 @@ export const DefaultData = {
                         tin: 0
                     },
                     station: ""
+                    // smelt
                 }
                 // properties: {durability: notation}
             },
@@ -279,6 +310,7 @@ export const DefaultData = {
                         iron: 0
                     },
                     station: ""
+                    // smelt
                 }
             },
             steel: {
@@ -292,6 +324,7 @@ export const DefaultData = {
                     },
                     station: ""
                 }
+                // smelt
             },
             toolSteel: {
                 title: "Tool Steel",
@@ -304,6 +337,7 @@ export const DefaultData = {
                     },
                     station: ""
                 }
+                // smelt
             },
             tungstenCarbide: {
                 title: "Tungsten Carbide",
@@ -317,6 +351,7 @@ export const DefaultData = {
                     },
                     station: ""
                 }
+                // crush, smelt
             }
         },
         tools: {
@@ -329,6 +364,28 @@ export const DefaultData = {
             //         }
             //     }
             // }
+            basket: {
+                title: "Basket",
+                type: "idk",
+                crafting: {
+                    isCraftable: true,
+                    requiredItems: {
+                        straw: 0,
+
+                    }
+                }
+            },
+            bucket: {
+                title: "Bucket",
+                type: "idk",
+                crafting: {
+                    isCraftable: true,
+                    requiredItems: {
+                        bucket: 1,
+                        clay: 1
+                    }
+                }
+            },
 
             stoneAxe: {
                 title: "Stone Axe",
@@ -340,6 +397,8 @@ export const DefaultData = {
                         stone: 2
                     }
                 }
+                // station = firepit
+                // molds?
             },
 
             copperAxe: {
@@ -352,6 +411,8 @@ export const DefaultData = {
                         copper: 2
                     }
                 }
+                // station = firepit (material)
+                
             },
             bronzeAxe: {
                 title: "Bronze Axe",
@@ -363,6 +424,8 @@ export const DefaultData = {
                         bronze: 2
                     }
                 }
+                // station = (clay/adobe) furnace ) (material)
+                // ( two furnaces? )
             },
             ironAxe: {
                 title: "Iron Axe",
@@ -374,6 +437,8 @@ export const DefaultData = {
                         stone: 2
                     }
                 }
+                // station = (clay/adobe) furnace
+                // anvil
             },
             steelAxe: {
                 title: "Steel Axe",
@@ -385,6 +450,7 @@ export const DefaultData = {
                         stone: 2
                     }
                 }
+                // station = crucible furnace
             },
             toolSteelAxe: {
                 title: "Tool Steel Axe",
@@ -396,6 +462,7 @@ export const DefaultData = {
                         stone: 2
                     }
                 }
+                // station = crucible furnace
             },
 
 
@@ -424,6 +491,22 @@ export const DefaultData = {
                     }
                 }
             },
+        },
+        idkTBD: {
+            
+            bellows: {
+                title: "Bellows",
+                type: "idk",
+                crafting: {
+                    isCraftable: true,
+                    requiredItems: {
+                        wood: 2,
+                        hide: 1, // leather
+                        clay: 1,
+                    }
+                }
+
+            }
         }
     },
     structures: {
@@ -439,6 +522,35 @@ export const DefaultData = {
                 requiredItems: {
                     stick: 3,
                     stone: 5
+                }
+            },
+            craftingBench: {
+                title: "Crafting Bench",
+                requiredItems: {
+                    wood: 0,
+                    walnut: 0,
+                    bronze: 0,
+                    // table (wood)
+                    // tools (wood/stick, minerals)
+                    // upgradable (tools)
+                },
+                requiredTools: ["axe"]
+            },
+            clayFurnace: {
+                title: "Furnace",
+                requiredItems: {
+                    clay: 3,
+                    straw: 0,
+                    sand: 0,
+                    // water? bucket
+                    bellows: 0
+                },
+                requiredTools: ["bucket"]
+            },
+            crucibleFurnace: {
+                title: "Crucible Furnace",
+                requiredItems: {
+                    // crucible (clay/graphite)
                 }
             }
         }
