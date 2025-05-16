@@ -76,8 +76,6 @@ export const useInventoryStore = create<InventoryState>((set) => ({
         }))
     },
     inventoryAddItem: (addedItem, materialCost) => {
-        console.log(materialCost)
-
         Object.entries(materialCost).forEach(([material, properties]) => {
             return set(produce((inventory) => {
                 let currentPath: any = inventory

@@ -5,7 +5,8 @@ const itemPath = {
     mineral: ["material", "mineral"],
     ore: ["material", "mineral", "ore"],
     ingot: ["material", "mineral", "ingot"],
-    forage: ["material", "forage"]
+    forage: ["material", "forage"],
+    tool: ["tool"]
 } 
 
 export const DefaultData = {
@@ -365,145 +366,150 @@ export const DefaultData = {
                 title: "Straw",   
                 itemKey: "straw", // Added itemKey
                 path: itemPath.forage,
-              },
+            },
 
-
+            // Craftable Items
+            basket: {
+                title: "Basket",
+                itemKey: "basket",
+                path: itemPath.tool,
+            }  
 
 
             // account for new log/plank ore/ingots setup (WRITE ITEM PATHS FOR INVENTORY AND CRAFTING)
 
-            pine: {
-                title: "Pine",
-                type: "wood",
+            // pine: {
+            //     title: "Pine",
+            //     type: "wood",
 
-            },
-            walnut: { // issue if walnuts (nut) are added later
-                title: "Walnut",
-                type: "wood",
+            // },
+            // walnut: { // issue if walnuts (nut) are added later
+            //     title: "Walnut",
+            //     type: "wood",
 
-            },
-            oak: {
-                title: "Oak",
-                type: "wood"
-            },
-            ash: { // potential issue if ash (powder) is added later
-                title: "Ash",
-                type: "wood"
-            },
-            copper: {
-                title: "Copper",
-                type: "mineral",
-                processing: {
-                    isProcessable: false
-                    // hammar, smelt
-                }
-            },
-            tin: {
-                title: "Tin",
-                type: "mineral",
-                processing: {
-                    isProcessable: false
-                }
-            },
-            iron: {
-                title: "Iron",
-                type: "mineral",
-                processing: {
-                    isProcessable: false
-                }
-            },
-            cobalt: {
-                title: "Cobalt",
-                type: "mineral",
-                processing: {
-                    isProcessable: false
-                }
-            },
-            tungsten: {
-                title: "Tungsten",
-                type: "mineral",
-                processing: {
-                    isProcessable: false
-                }
-            },
-            diamond: {
-                title: "Diamond",
-                type: "mineral",
-                processing: {
-                    isProcessable: true,
-                    requiredResources: {
-                        graphite: 0,
-                        cobalt: 0
-                    },
-                    station: ""
-                }
-            },
-            bronze: {
-                title: "Bronze",
-                type: "mineral",
-                processing: {
-                    isProcessable: true,
-                    requiredResources: {
-                        copper: 0,
-                        tin: 0
-                    },
-                    station: ""
-                    // smelt
-                }
-                // properties: {durability: notation}
-            },
-            castIron: {
-                title: "Cast Iron",
-                type: "mineral",
-                processing: {
-                    isProcessable: true,
-                    requiredResources: {
-                        iron: 0
-                    },
-                    station: ""
-                    // smelt
-                }
-            },
-            steel: {
-                title: "Steel",
-                type: "mineral",
-                processing: {
-                    isProcessable: true,
-                    requiredResources: {
-                        iron: 0,
-                        coal: 0
-                    },
-                    station: ""
-                }
-                // smelt
-            },
-            toolSteel: {
-                title: "Tool Steel",
-                type: "mineral",
-                processing: {
-                    isProcessable: true,
-                    requiredResources: {
-                        iron: 0,
-                        tungsten: 0
-                    },
-                    station: ""
-                }
-                // smelt
-            },
-            tungstenCarbide: {
-                title: "Tungsten Carbide",
-                type: "mineral",
-                processing: {
-                    isProcessable: true,
-                    requiredResources: {
-                        tungsten: 0,
-                        cobalt: 0,
-                        coal: 0
-                    },
-                    station: ""
-                }
-                // crush, smelt
-            }
+            // },
+            // oak: {
+            //     title: "Oak",
+            //     type: "wood"
+            // },
+            // ash: { // potential issue if ash (powder) is added later
+            //     title: "Ash",
+            //     type: "wood"
+            // },
+            // copper: {
+            //     title: "Copper",
+            //     type: "mineral",
+            //     processing: {
+            //         isProcessable: false
+            //         // hammar, smelt
+            //     }
+            // },
+            // tin: {
+            //     title: "Tin",
+            //     type: "mineral",
+            //     processing: {
+            //         isProcessable: false
+            //     }
+            // },
+            // iron: {
+            //     title: "Iron",
+            //     type: "mineral",
+            //     processing: {
+            //         isProcessable: false
+            //     }
+            // },
+            // cobalt: {
+            //     title: "Cobalt",
+            //     type: "mineral",
+            //     processing: {
+            //         isProcessable: false
+            //     }
+            // },
+            // tungsten: {
+            //     title: "Tungsten",
+            //     type: "mineral",
+            //     processing: {
+            //         isProcessable: false
+            //     }
+            // },
+            // diamond: {
+            //     title: "Diamond",
+            //     type: "mineral",
+            //     processing: {
+            //         isProcessable: true,
+            //         requiredResources: {
+            //             graphite: 0,
+            //             cobalt: 0
+            //         },
+            //         station: ""
+            //     }
+            // },
+            // bronze: {
+            //     title: "Bronze",
+            //     type: "mineral",
+            //     processing: {
+            //         isProcessable: true,
+            //         requiredResources: {
+            //             copper: 0,
+            //             tin: 0
+            //         },
+            //         station: ""
+            //         // smelt
+            //     }
+            //     // properties: {durability: notation}
+            // },
+            // castIron: {
+            //     title: "Cast Iron",
+            //     type: "mineral",
+            //     processing: {
+            //         isProcessable: true,
+            //         requiredResources: {
+            //             iron: 0
+            //         },
+            //         station: ""
+            //         // smelt
+            //     }
+            // },
+            // steel: {
+            //     title: "Steel",
+            //     type: "mineral",
+            //     processing: {
+            //         isProcessable: true,
+            //         requiredResources: {
+            //             iron: 0,
+            //             coal: 0
+            //         },
+            //         station: ""
+            //     }
+            //     // smelt
+            // },
+            // toolSteel: {
+            //     title: "Tool Steel",
+            //     type: "mineral",
+            //     processing: {
+            //         isProcessable: true,
+            //         requiredResources: {
+            //             iron: 0,
+            //             tungsten: 0
+            //         },
+            //         station: ""
+            //     }
+            //     // smelt
+            // },
+            // tungstenCarbide: {
+            //     title: "Tungsten Carbide",
+            //     type: "mineral",
+            //     processing: {
+            //         isProcessable: true,
+            //         requiredResources: {
+            //             tungsten: 0,
+            //             cobalt: 0,
+            //             coal: 0
+            //         },
+            //         station: ""
+            //     }
+            //     // crush, smelt
+            // }
         },
         tools: {
             // axe: {
@@ -526,17 +532,17 @@ export const DefaultData = {
                     }
                 }
             },
-            bucket: {
-                title: "Bucket",
-                type: "idk",
-                crafting: {
-                    isCraftable: true,
-                    requiredItems: {
-                        bucket: 1,
-                        clay: 1
-                    }
-                }
-            },
+            // bucket: {
+            //     title: "Bucket",
+            //     type: "idk",
+            //     crafting: {
+            //         isCraftable: true,
+            //         requiredItems: {
+            //             basket: 1,
+            //             clay: 1
+            //         }
+            //     }
+            // },
 
             stoneAxe: {
                 title: "Stone Axe",
@@ -558,8 +564,8 @@ export const DefaultData = {
                 crafting: {
                     isCraftable: true,
                     requiredItems: {
-                        pine: 1,
-                        copper: 2
+                        pineLog: 1,
+                        copperIngot: 2
                     }
                 }
                 // station = firepit (material)
@@ -571,8 +577,8 @@ export const DefaultData = {
                 crafting: {
                     isCraftable: true,
                     requiredItems: {
-                        walnut: 1,
-                        bronze: 2
+                        walnutLog: 1,
+                        bronzeIngot: 2
                     }
                 }
                 // station = (clay/adobe) furnace ) (material)
@@ -584,7 +590,7 @@ export const DefaultData = {
                 crafting: {
                     isCraftable: true,
                     requiredItems: {
-                        oak: 1,
+                        oakLog: 1,
                         stone: 2
                     }
                 }
@@ -597,7 +603,7 @@ export const DefaultData = {
                 crafting: {
                     isCraftable: true,
                     requiredItems: {
-                        oak: 1,
+                        oakLog: 1,
                         stone: 2
                     }
                 }
@@ -609,7 +615,7 @@ export const DefaultData = {
                 crafting: {
                     isCraftable: true,
                     requiredItems: {
-                        ash: 1,
+                        ashLog: 1,
                         stone: 2
                     }
                 }

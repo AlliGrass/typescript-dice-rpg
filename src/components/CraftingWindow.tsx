@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react"
 import { useDefaults } from "../contexts/DefaultsContext"
-import { PlayerState, usePlayerStore } from "../stores/usePlayerStore"
 import { useInventoryStore } from "../stores/useInventoryStore"
 
 const CraftingWindow = () => {
@@ -10,35 +9,43 @@ const CraftingWindow = () => {
     const inventory = useInventoryStore()
     const { inventoryAddItem } = useInventoryStore()
 
-    const addItemFunction = () => {
-        const materials = {
-            stick: {
-                path: ["material", "wood"],
-                amount: 1
-            },
-            stone: {
-                path: ["material", "mineral"],
-                amount: 2
+    const addItemFunction = (itemAdded: string, requiredItems: [key: string]) => {
+        Object.entries(requiredItems).map(([material, amount]) => {
+            return {
+                [material]: {
+                    path: resources[material].path,
+                    amount: amount
+                }
             }
-        }
-        inventoryAddItem("stoneAxe", materials)
+        })
+        const materialCost = Object.assign({}, ...Object.entries(requiredItems).map(([material, amount]) => {
+            return {
+                [material]: {
+                    path: resources[material].path,
+                    amount: amount
+                }
+            }
+        }))
+        inventoryAddItem(itemAdded, materialCost)
     }
 
-    // const getMaterialAmount = (resource: string): number => {
-    //     const path = resources[resource].path
-    //     let currentPath: any = inventory
-    //     for (const nextPosition of path) {
-    //         currentPath = currentPath[nextPosition]
-    //     }
-        
-    //     return currentPath[resources[resource].itemKey]
-    // }
+    const getMaterialAmount = (resource: string): number => {
+
+        const path = resources[resource].path
+        // console.log(path)
+        let currentPath: any = inventory
+        for (const nextPosition of path) {
+            currentPath = currentPath[nextPosition]
+        }
+        return currentPath[resources[resource].itemKey]
+
+    }
 
 
     return (
         <div>
             <h1>Crafting Tools</h1>
-            <button onClick={addItemFunction}>testAddItem</button>
+            {/* <button onClick={addItemFunction}>testAddItem</button> */}
             <button onClick={() => console.log(inventory)}>show inventory</button>
             {
                 Object.entries(inventory.material).map(([key, value]) => <h3>{key +": " + value}</h3>)
@@ -49,13 +56,14 @@ const CraftingWindow = () => {
                 {Object.entries(tools).map(([itemObject, itemObjectValues]) => {
                     const [craftingAvailable, setCraftingAvailable] = useState<boolean>()
 
-                    // const materialsAvailable = useMemo(() => (
+                    const materialsAvailable = useMemo(() => (
 
-                    //     Object.entries(itemObjectValues.crafting.requiredItems).every(([material, required]) => {
-                    //         (getMaterialAmount(material) ?? 0) >= required
+                        Object.entries(itemObjectValues.crafting.requiredItems).every(([resource, required]) => getMaterialAmount(resource) >= required)
 
-                    //     })
-                    // ), [inventory])
+
+                    ), [inventory])
+
+
                     return (
                         <div>
                             <h2>{itemObjectValues.title}</h2>
@@ -65,7 +73,7 @@ const CraftingWindow = () => {
                                     <p>{material + ": " + amount}</p>
                                 )
                             })}
-                            <button disabled={!materialsAvailable} onClick={() => addItem(itemObject, itemObjectValues.crafting.requiredItems)}>Craft Item</button>
+                            <button disabled={!materialsAvailable} onClick={() => addItemFunction(itemObject, itemObjectValues.crafting.requiredItems)}>Craft Item</button>
                         </div>
                     )
                 })}
