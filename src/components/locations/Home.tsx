@@ -21,7 +21,7 @@ const Home = () => {
                     'border': 'solid red',
                     'padding': '35px',
                 }}>
-                    {/* <CraftingWindow/> */}
+                    <CraftingWindow/>
                 </section>
         </div>
     )

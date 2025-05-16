@@ -1,8 +1,10 @@
+import { useInventoryStore } from "../stores/useInventoryStore"
 import { PlayerState, usePlayerStore } from "../stores/usePlayerStore"
 
 
 const InventoryWindow = () => {
-    const playerInventory = usePlayerStore((state: PlayerState) => state.inventory)
+    const playerInventory = useInventoryStore()
+    // const playerInventory = usePlayerStore((state: PlayerState) => state.inventory)
 
     
 

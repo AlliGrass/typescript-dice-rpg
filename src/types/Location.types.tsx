@@ -23,6 +23,8 @@ export type LocationType = {
     }[]
 }
 
+
+
 export type LocationElement = JSX.Element
 
 export const PageLocations: Record<LocationNameType, LocationElement> = {

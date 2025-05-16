@@ -25,9 +25,9 @@ I began learning TypeScript by wanting to remake my portfolio which included a P
 
 ## Development Notes
 ### Recently Implemented:
-- **Crafting functionality currently suspended. Reconstructing material types.**
+- **Crafting window currently suspended. Reconstructing material types.**
 - ~~Inventory & Crafting Windows with responsive craft buttons based on available materials.~~
-- ~~Crafting function that removes relevant materials ands crafted item to player inventory.~~
+- Crafting function that removes relevant materials ands crafted item to player inventory.
 - Action buttons dependent on relevant items to enable.
 
 ### Known Issues & Solutions

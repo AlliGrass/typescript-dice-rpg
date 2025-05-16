@@ -1,3 +1,13 @@
+const itemPath = {
+    wood: ["material", "wood"],
+    log: ["material", "wood", "log"],
+    plank: ["material", "wood", "plank"],
+    mineral: ["material", "mineral"],
+    ore: ["material", "mineral", "ore"],
+    ingot: ["material", "mineral", "ingot"],
+    forage: ["material", "forage"]
+} 
+
 export const DefaultData = {
     initial: {
         page: {
@@ -237,25 +247,131 @@ export const DefaultData = {
     },
     items: {
         resources: {
-            itemName: {
-                path: "", // ? ["path1", "path2"] ??? "materials.wood.oaklog" ?????
-                properties: { // item meta
-                    title: "Name?"
-                },
-            },
-
-            
-            // account for new log/plank ore/ingots setup (WRITE ITEM PATHS FOR INVENTORY AND CRAFTING)
-            clay: {
-                title: "Clay",
-                type: "forage", // ?
-             
-            },
+            // Wood
             stick: {
                 title: "Stick",
-                type: "wood",
-                
+                itemKey: "stick",
+                path: itemPath.wood,
             },
+            // Logs
+            pineLog: {
+                title: "Pine Log",
+                itemKey: "pine",
+                path: itemPath.log,
+            },
+            oakLog: {
+                title: "Oak Log", 
+                itemKey: "oak",   
+                path: itemPath.log,
+            },
+            walnutLog: {
+                title: "Walnut Log", 
+                itemKey: "walnut",
+                path: itemPath.log,
+            },
+            ashLog: {
+                title: "Ash Log", 
+                itemKey: "ash",
+                path: itemPath.log,
+            },
+            // Plank
+            pinePlank: {
+                title: "Pine Plank", 
+                itemKey: "pine",  
+                path: itemPath.plank,
+            },
+            oakPlank: {
+                title: "Oak Plank", 
+                itemKey: "oak",  
+                path: itemPath.plank,
+            },
+            walnutPlank: {
+                title: "Walnut Plank", 
+                itemKey: "walnut",  
+                path: itemPath.plank,
+            },
+            ashPlank: {
+                title: "Ash Plank", 
+                itemKey: "ash",  
+                path: itemPath.plank,
+            },
+
+            // Minerals
+            stone: {
+                title: "Stone",   
+                itemKey: "stone", // Added itemKey
+                path: itemPath.mineral,
+            },
+            coal: {
+                title: "Coal",    
+                itemKey: "coal",  // Added itemKey
+                path: itemPath.mineral,
+            },
+            // Ore
+            copperOre: {
+                title: "Copper Ore",
+                itemKey: "copper",
+                path: itemPath.ore,
+            },
+            tinOre: {
+                title: "Tin Ore",   
+                itemKey: "tin",  
+                path: itemPath.ore,
+            },
+            ironOre: {
+                title: "Iron Ore",  
+                itemKey: "iron", 
+                path: itemPath.ore,
+            },
+            cobaltOre: {
+                title: "Cobalt Ore", 
+                itemKey: "cobalt",
+                path: itemPath.ore,
+            },
+            tungstenOre: {
+                title: "Tungsten Ore", 
+                itemKey: "tungsten",
+                path: itemPath.ore,
+            },
+            // Ingot
+            copperIngot: {
+                title: "Copper Ingot", 
+                itemKey: "copper",  
+                path: itemPath.ingot,
+            },
+            bronzeIngot: {
+                title: "Bronze Ingot", 
+                itemKey: "bronze",  
+                path: itemPath.ingot,
+            },
+            ironIngot: {
+                title: "Iron Ingot",   
+                itemKey: "iron",    
+                path: itemPath.ingot,
+            },
+            tungstenIngot: {
+                title: "Tungsten Ingot", 
+                itemKey: "tungsten",  
+                path: itemPath.ingot,
+            },
+
+            // Forage
+            clay: {
+                title: "Clay",    
+                itemKey: "clay",  // Added itemKey
+                path: itemPath.forage,
+            },
+            straw: {
+                title: "Straw",   
+                itemKey: "straw", // Added itemKey
+                path: itemPath.forage,
+              },
+
+
+
+
+            // account for new log/plank ore/ingots setup (WRITE ITEM PATHS FOR INVENTORY AND CRAFTING)
+
             pine: {
                 title: "Pine",
                 type: "wood",
@@ -273,20 +389,6 @@ export const DefaultData = {
             ash: { // potential issue if ash (powder) is added later
                 title: "Ash",
                 type: "wood"
-            },
-            stone: {
-                title: "Stone",
-                type: "mineral",
-                processing: {
-                    isProcessable: false
-                }
-            },
-            coal: {
-                title: "Coal",
-                type: "mineral",
-                processing: {
-                    isProcessable: false
-                }
             },
             copper: {
                 title: "Copper",

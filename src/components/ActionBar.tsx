@@ -3,6 +3,7 @@ import { LocationNameType } from "../types/Location.types";
 import { useActionButtons } from "../hooks/useActionButtons";
 import { useDefaults } from "../contexts/DefaultsContext";
 import { PlayerState, usePlayerStore } from "../stores/usePlayerStore";
+import { useInventoryStore } from "../stores/useInventoryStore";
 
 interface ActionBarProp {
     location: LocationNameType,
@@ -11,7 +12,7 @@ interface ActionBarProp {
 
 const ActionBar = ({location, craftingVisibility}: ActionBarProp) => {
     const { initial: { page: { locations } } } = useDefaults()
-    const playerInventory = usePlayerStore( (state: PlayerState) => state.inventory)
+    const playerInventory = useInventoryStore()
 
 
     type ActionBarButtons =  {
@@ -25,7 +26,7 @@ const ActionBar = ({location, craftingVisibility}: ActionBarProp) => {
         variable?: any[],
     }
 
-    const buttonActions = useActionButtons()
+    const buttonAction = useActionButtons()
 
     const [actionButtons, setActionButtons] = useState<ActionBarButtons[]>([])
 
@@ -46,7 +47,7 @@ const ActionBar = ({location, craftingVisibility}: ActionBarProp) => {
                     return (
                     <button 
                         key={index} 
-                        onClick={() => buttonInfo.variable? buttonActions[buttonInfo.action](buttonInfo.variable) : buttonActions[buttonInfo.action]()} 
+                        onClick={() => buttonInfo.variable? buttonAction[buttonInfo.action](buttonInfo.variable) : buttonAction[buttonInfo.action]()} 
                         disabled={!buttonActive}
                     >
                         {buttonInfo.title}

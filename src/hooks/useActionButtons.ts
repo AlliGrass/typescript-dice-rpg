@@ -1,4 +1,6 @@
+import { useDefaults } from "../contexts/DefaultsContext";
 import { useDiceStore } from "../stores/useDiceStore";
+import { useInventoryStore } from "../stores/useInventoryStore";
 import { usePlayerStore } from "../stores/usePlayerStore";
 
 type ActionButtonType = {
@@ -7,11 +9,13 @@ type ActionButtonType = {
   
 export const useActionButtons = (): ActionButtonType => {
     const { checkActionAttempt, rollDice } = useDiceStore()
-    const { inventoryUpdateMaterial } = usePlayerStore()
+    const { inventoryUpdateMaterial } = useInventoryStore()
+    const { items: { resources } } = useDefaults()
 
-    const gatherMaterial = (material: string) => {
+    const gatherMaterial = (resource: string) => {
+        const resourcePath = resources[resource].path
         if (checkActionAttempt(100,0)) {
-            inventoryUpdateMaterial(material, rollDice(2, true))
+            inventoryUpdateMaterial(resource, resourcePath, rollDice(2, true))
         }
     }
 
@@ -21,7 +25,7 @@ export const useActionButtons = (): ActionButtonType => {
 
 
     return {
-        gatherMaterial: ([material]: [string]) => gatherMaterial(material),
+        gatherMaterial: ([resource]: [string]) => gatherMaterial(resource),
         templateFunction: () => templateFunction()
     };
 };
