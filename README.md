@@ -1,5 +1,5 @@
 # Dice RPG
-A webapp game that relies on dice rolls to progress through the game. Currently only at the stage which is building the core fundamentals for the web application. In future it will be a fully functional web-based game that stores users information with cookies and cache so that the user can close the window without worrying of losing their progress. May be elements of idle mechanics which rely on type passing and other common mechanics within games.
+A webapp game that relies on dice rolls to progress through the game. Currently only at the stage which is building the core fundamentals for the web application. In future it will be a fully functional web-based game that stores users information with cookies and cache so that the user can close the window without worrying of losing their progress. May be elements of idle mechanics which rely on time passing and other common mechanics within games.
 
 ## Tech Stack
 ### Languages: TypeScript, HTML
