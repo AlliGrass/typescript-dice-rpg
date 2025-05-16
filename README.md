@@ -35,6 +35,10 @@ I began learning TypeScript by wanting to remake my portfolio which included a P
   - Affected Files: `usePlayerStore`, `DefaultContext`, `ActionBar`, etc.
   - Status: Functional. (Dev-Only Warnings)
   - Plan: Explicit typing post-prototype phase.
+- **Home Page Nonfunctional**: 
+  - Affected Files: `Home`, `CraftingWindow`
+  - Status: Non-Functional `Home` page. 
+  - Plan: Crafting Window in development.
 
 ### Incoming Development:
 - Functional crafting system
