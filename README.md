@@ -25,9 +25,9 @@ I began learning TypeScript by wanting to remake my portfolio which included a P
 
 ## Development Notes
 ### Recently Implemented:
+- Singular tool at a time and tool properties.
 - Inventory & Crafting Windows with responsive craft buttons based on available materials.
 - Crafting function that removes relevant materials ands crafted item to player inventory.
-- Action buttons dependent on relevant items to enable.
 
 ### Known Issues & Solutions
 - **Type Inference Warnings**: 
@@ -36,8 +36,7 @@ I began learning TypeScript by wanting to remake my portfolio which included a P
   - Plan: Explicit typing post-prototype phase.
 
 ### Incoming Development:
-- Functional crafting system
-- Unlockable actions and locations
+- Unlockable actions and locations (Not visible until conditions met)
 - Fully localised types and interfaces to avoid cluttering component files.
 - Fully optimized base level functions. (Scalable Friendly)
 - Player leveling system / meaningful progression.

@@ -78,7 +78,7 @@ export const DefaultData = {
                                 type: "tool",
                                 require: "stonePickaxe"
                             },
-                            variable: ["copper"],
+                            variable: ["copperOre"],
                         },
                         
                         {
@@ -87,28 +87,28 @@ export const DefaultData = {
                             action: "gatherMaterial",
                             requirement: {
                                 type: "tool",
-                                require: ""
+                                require: "unknown"
                             },
-                            variable: ["iron"]
+                            variable: ["ironOre"]
                         },
                         {
                             title: "Tungsten",
                             active: false,
                             requirement: {
                                 type: "tool",
-                                require: ""
+                                require: "unknown"
                             },
-                            variable: ["tungsten"]
+                            variable: ["tungstenOre"]
                         },
-                        {
-                            title: "Diamond",
-                            active: false,
-                            requirement: {
-                                type: "tool",
-                                require: ""
-                            },
-                            variable: ["diamond"]
-                        }
+                        // {
+                        //     title: "Diamond",
+                        //     active: false,
+                        //     requirement: {
+                        //         type: "tool",
+                        //         require: ""
+                        //     },
+                        //     variable: ["diamond"]
+                        // }
                     ]
                 },
                 river: {
@@ -129,7 +129,7 @@ export const DefaultData = {
                             action: "templateFunction",
                             requirement: {
                                 type: "tool", // structure
-                                require: ""
+                                require: "unknown"
                             },
                         },
                         {
@@ -138,7 +138,7 @@ export const DefaultData = {
                             action: "templateFunction",
                             requirement: {
                                 type: "tool", // unknown
-                                require: ""
+                                require: "unknown"
                             },
                         }
                     ]
@@ -157,7 +157,7 @@ export const DefaultData = {
                             action: "templateFunction",
                             requirement: {
                                 type: "tool",
-                                require: ""
+                                require: "unknown"
                             },
                         }
                     ]
@@ -182,16 +182,6 @@ export const DefaultData = {
                             variable: ["stick"],
                         },
                         {
-                            title: 'Gather Wood',
-                            active: false,
-                            action: "gatherMaterial",
-                            requirement: {
-                                type: "tool",
-                                require: "stoneAxe"
-                            },
-                            variable: ["wood"],
-                        },
-                        {
                             title: "Gather Pine",
                             active: false,
                             action: "gatherMaterial",
@@ -199,7 +189,7 @@ export const DefaultData = {
                                 type: "tool",
                                 require: "stoneAxe"
                             },
-                            variable: ["pine"]
+                            variable: ["pineLog"]
                         },
                         {
                             title: "Gather Oak",
@@ -209,7 +199,7 @@ export const DefaultData = {
                                 type: "tool",
                                 require: "stoneAxe"
                             },
-                            variable: ["oak"]
+                            variable: ["oakLog"]
                         },
                         {
                             title: "Gather Walnut",
@@ -219,7 +209,7 @@ export const DefaultData = {
                                 type: "tool",
                                 require: "stoneAxe"
                             },
-                            variable: ["walnut"]
+                            variable: ["walnutLog"]
                         },
                         {
                             title: "Gather Ash",
@@ -229,7 +219,7 @@ export const DefaultData = {
                                 type: "tool",
                                 require: "stoneAxe"
                             },
-                            variable: ["ash"]
+                            variable: ["ashLog"]
                         },
                     ]
                 }
@@ -553,6 +543,10 @@ export const DefaultData = {
                         stick: 1,
                         stone: 2
                     }
+                },
+                properties: {
+                    condition: "Pristine",
+                    durability: 100
                 }
                 // station = firepit
                 // molds?

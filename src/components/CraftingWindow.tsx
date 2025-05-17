@@ -9,15 +9,10 @@ const CraftingWindow = () => {
     const inventory = useInventoryStore()
     const { inventoryAddItem } = useInventoryStore()
 
-    const addItemFunction = (itemAdded: string, requiredItems: [key: string]) => {
-        Object.entries(requiredItems).map(([material, amount]) => {
-            return {
-                [material]: {
-                    path: resources[material].path,
-                    amount: amount
-                }
-            }
-        })
+    const addItemFunction = (itemID: string, requiredItems: [key: string]) => {
+        const itemAdded = {
+            [itemID]: tools[itemID].properties
+        }
         const materialCost = Object.assign({}, ...Object.entries(requiredItems).map(([material, amount]) => {
             return {
                 [material]: {
@@ -73,7 +68,7 @@ const CraftingWindow = () => {
                                     <p>{material + ": " + amount}</p>
                                 )
                             })}
-                            <button disabled={!materialsAvailable} onClick={() => addItemFunction(itemObject, itemObjectValues.crafting.requiredItems)}>Craft Item</button>
+                            <button disabled={(!materialsAvailable || inventory.tool[itemObject])} onClick={() => addItemFunction(itemObject, itemObjectValues.crafting.requiredItems)}>Craft Item</button>
                         </div>
                     )
                 })}

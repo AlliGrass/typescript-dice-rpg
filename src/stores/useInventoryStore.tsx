@@ -4,7 +4,7 @@ import { produce } from "immer";
 
 type InventoryState = {
     material: MaterialType, 
-    tool: string[]
+    tool: any, // to be explicitly stated
     item: string[],
     equipped: {
         helmet: string,
@@ -12,11 +12,7 @@ type InventoryState = {
         shoes: string,
     },
     inventoryUpdateMaterial: (resource: string, path: string[], amount: number) => void,
-    inventoryAddItem: (addedItem: string, materialCost: {[key: string]: {path: string[], amount: number}}) => void
-
-
-    // inventoryAddDebugTestMaterials: () => void,
-    // inventoryAddDebugTestItems: () => void,
+    inventoryAddItem: (addedItem: {[key: string]: any}, materialCost: {[key: string]: {path: string[], amount: number}}) => void
 }
 
 export const useInventoryStore = create<InventoryState>((set) => ({
@@ -59,7 +55,12 @@ export const useInventoryStore = create<InventoryState>((set) => ({
         }
 
     },
-    tool: [],
+    tool: {
+        // stoneAxe: {
+        //  condition: "",
+        //  durability: num
+        // }
+    }, 
     item: [],
     equipped: {
         helmet: "",
@@ -72,7 +73,7 @@ export const useInventoryStore = create<InventoryState>((set) => ({
             for (const nextPosition of path) {
                 currentPath = currentPath[nextPosition]   
             }
-            currentPath[resource] += amount
+            currentPath[resource] = (currentPath[resource] || 0) + amount
         }))
     },
     inventoryAddItem: (addedItem, materialCost) => {
@@ -83,6 +84,6 @@ export const useInventoryStore = create<InventoryState>((set) => ({
                 currentPath[material] -= properties.amount
             }))
         })
-        set(produce(inventory => {inventory.tool.push(addedItem)}))
+        set(produce(inventory => {Object.assign(inventory.tool, addedItem)}))
     }
 }))

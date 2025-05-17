@@ -35,8 +35,10 @@ export type DefaultContextType = {
     items: {
         resources: {
             // materials?
+            [key:string]: any
         },
         tools: {
+            [key: string]: any
             stoneAxe: {
                 title: string,
                 type: string

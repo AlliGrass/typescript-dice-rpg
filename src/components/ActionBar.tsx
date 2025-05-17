@@ -29,21 +29,18 @@ const ActionBar = ({location, craftingVisibility}: ActionBarProp) => {
     const buttonAction = useActionButtons()
 
     const [actionButtons, setActionButtons] = useState<ActionBarButtons[]>([])
+    
 
     useEffect(() => {
         setActionButtons(locations[location].buttons)
     }, [location]) // change to memo/callback later (?)
-
-
 
     return (
         <div>
             <h2>Action Bar</h2>
             {
                 actionButtons.map((buttonInfo, index) => {
-                    const requirementFulfilled = buttonInfo.requirement? playerInventory[buttonInfo.requirement.type].includes(buttonInfo.requirement.require): false
-
-                    const buttonActive = buttonInfo.active ? true : requirementFulfilled
+                    const buttonActive = buttonInfo.active ? true : buttonInfo.requirement? playerInventory[buttonInfo.requirement.type][buttonInfo.requirement.require]? true : false : false
                     return (
                     <button 
                         key={index} 
