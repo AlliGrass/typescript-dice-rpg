@@ -7,6 +7,7 @@ import { DiceRollType, useDiceStore } from "../stores/useDiceStore"
 
 import Profile from "../components/Profile"
 import InventoryWindow from "../components/InventoryWindow"
+import { useInventoryStore } from "../stores/useInventoryStore"
 
 
 
@@ -22,7 +23,7 @@ const BasePage = () => {
 
     const [inventoryVisibility, setInventoryVisibility] = useState<boolean>(false)
 
-    const [currentLocation, setCurrentLocation] = useState<LocationNameType>("wildlands")
+    const [currentLocation, setCurrentLocation] = useState<LocationNameType>("home")
 
     const diceResult = useDiceStore( (state: DiceRollType) => state.diceResult)
     const rollDice = useDiceStore( (state: DiceRollType) => state.rollDice)
@@ -43,9 +44,7 @@ const BasePage = () => {
     //     setPageComponentVisibility((pageComponents) => ({...pageComponents, [component]: !pageComponents[component]}))
     // }
 
-    const {inventoryAddDebugTestItems, inventoryAddDebugTestMaterials} = usePlayerStore()
-
-
+    const { inventoryAddDebugTestItems } = useInventoryStore()
     const debugTestFunction = () => {
         inventoryAddDebugTestItems()
     }

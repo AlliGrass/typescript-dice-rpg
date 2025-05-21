@@ -12,7 +12,9 @@ type InventoryState = {
         shoes: string,
     },
     inventoryUpdateMaterial: (resource: string, path: string[], amount: number) => void,
-    inventoryAddItem: (addedItem: {[key: string]: any}, materialCost: {[key: string]: {path: string[], amount: number}}) => void
+    inventoryAddItem: (addedItem: {[key: string]: any}, materialCost: {[key: string]: {path: string[], amount: number}}) => void,
+    getToolDropRate: (toolType: string) => void,
+    inventoryAddDebugTestItems: () => void
 }
 
 export const useInventoryStore = create<InventoryState>((set) => ({
@@ -76,7 +78,7 @@ export const useInventoryStore = create<InventoryState>((set) => ({
             currentPath[resource] = (currentPath[resource] || 0) + amount
         }))
     },
-    inventoryAddItem: (addedItem, materialCost) => {
+    inventoryAddItem: (addedItem, materialCost) => { 
         Object.entries(materialCost).forEach(([material, properties]) => {
             return set(produce((inventory) => {
                 let currentPath: any = inventory
@@ -84,6 +86,18 @@ export const useInventoryStore = create<InventoryState>((set) => ({
                 currentPath[material] -= properties.amount
             }))
         })
-        set(produce(inventory => {Object.assign(inventory.tool, addedItem)}))
+        set(produce(inventory => {Object.assign(inventory.tool, addedItem)})) // hardcoded as tool
+    },
+    getToolDropRate: (toolType) => {
+
+    },
+    inventoryAddDebugTestItems: () => {
+        set(produce((inventory) => {
+            inventory.tool.stonePickaxe = {condition: "Pristine", durability: 100}
+            inventory.tool.stoneAxe = {condition: "Pristine", durability: 100}
+
+        }))
     }
+
+
 }))

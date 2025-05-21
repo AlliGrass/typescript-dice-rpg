@@ -34,6 +34,14 @@ I began learning TypeScript by wanting to remake my portfolio which included a P
   - Affected Files: `usePlayerStore`, `DefaultContext`, `ActionBar`, etc.
   - Status: Functional. (Dev-Only Warnings)
   - Plan: Explicit typing post-prototype phase.
+- **Impassable Window States**:
+  - Affected Files: `BasePage`, `InventoryWindow`, `CraftingWindow`
+  - Status: Local state applied.
+  - Plan: Research required before solution can be finalised.
+- **Unoptimised Performance**:
+  - Affected Files: `BasePage`, Hook/Store files
+  - Status: Functional.
+  - Plan: Reorganise when fundamental features have been implemented.
 
 ### Incoming Development:
 - Unlockable actions and locations (Not visible until conditions met)

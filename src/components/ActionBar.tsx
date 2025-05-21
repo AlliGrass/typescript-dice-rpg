@@ -44,7 +44,10 @@ const ActionBar = ({location, craftingVisibility}: ActionBarProp) => {
                     return (
                     <button 
                         key={index} 
-                        onClick={() => buttonInfo.variable? buttonAction[buttonInfo.action](buttonInfo.variable) : buttonAction[buttonInfo.action]()} 
+                        onClick={() => {
+                            console.log(buttonAction[buttonInfo.action])
+                            console.log(buttonInfo.variable)
+                            buttonInfo.variable? buttonAction[buttonInfo.action](...buttonInfo.variable) : buttonAction[buttonInfo.action]()}} 
                         disabled={!buttonActive}
                     >
                         {buttonInfo.title}

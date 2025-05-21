@@ -16,7 +16,7 @@ export const useDiceStore = create<DiceRollType>((set) => ({
         set(produce(state => {state[playerRoll? "diceResult" : "cpuDiceResult"] = diceRollResult }))
         return diceRollResult
     },
-        checkActionAttempt: (successDC, modifiers) => {
+    checkActionAttempt: (successDC, modifiers) => {
         const result = Math.floor(Math.random() * 100) + (modifiers? 1 - modifiers : 1)
         return result <= successDC? true : false
     } 

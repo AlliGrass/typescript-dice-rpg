@@ -5,12 +5,12 @@ const Wilderness = () => {
         <div>
             <h1>Wilderness</h1>
             <ul>
-                <li>grass</li>
-                <li></li>
+                <li>straw - 70</li>
             </ul>
             <label htmlFor="">with basket</label>
             <ul>
-                <li>clay</li>
+                <li>straw - 70</li>
+                <li>clay - 25</li>
             </ul>
         </div>
     )

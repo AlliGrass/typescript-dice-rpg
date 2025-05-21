@@ -55,60 +55,11 @@ export const DefaultData = {
                     title: "Mine", 
                     buttons: [
                         {
-                            title: "Gather Stone",
+                            title: "Gather Minerals",
                             active: true,
                             action: "gatherMaterial",
-                            variable: ["stone"],
+                            variable: ["stone", "pickaxe"],
                         },
-                        {
-                            title: "Coal",
-                            active: false,
-                            action: "gatherMaterial",
-                            requirement: {
-                                type: "tool",
-                                require: "stonePickaxe"
-                            },
-                            variable: ["coal"],
-                        },
-                        {
-                            title: "Copper",
-                            active: false,
-                            action: "gatherMaterial",
-                            requirement: {
-                                type: "tool",
-                                require: "stonePickaxe"
-                            },
-                            variable: ["copperOre"],
-                        },
-                        
-                        {
-                            title: "Iron",
-                            active: false,
-                            action: "gatherMaterial",
-                            requirement: {
-                                type: "tool",
-                                require: "unknown"
-                            },
-                            variable: ["ironOre"]
-                        },
-                        {
-                            title: "Tungsten",
-                            active: false,
-                            requirement: {
-                                type: "tool",
-                                require: "unknown"
-                            },
-                            variable: ["tungstenOre"]
-                        },
-                        // {
-                        //     title: "Diamond",
-                        //     active: false,
-                        //     requirement: {
-                        //         type: "tool",
-                        //         require: ""
-                        //     },
-                        //     variable: ["diamond"]
-                        // }
                     ]
                 },
                 river: {
@@ -149,7 +100,7 @@ export const DefaultData = {
                         {
                             title: "Scavenge for Resources",
                             active: true,
-                            action: "templateFunction",
+                            action: "scavengeTemplateFunction",
                         },
                         {
                             title: "Hunt for Food",
@@ -176,13 +127,14 @@ export const DefaultData = {
                     title: "Woodlands",
                     buttons: [
                         {
-                            title: 'Gather Sticks',
+                            title: "Roam Woods",
                             active: true,
                             action: "gatherMaterial",
-                            variable: ["stick"],
+                            variable: ["stick"]
                         },
+
                         {
-                            title: "Gather Pine",
+                            title: "Pine Forest",
                             active: false,
                             action: "gatherMaterial",
                             requirement: {
@@ -192,7 +144,7 @@ export const DefaultData = {
                             variable: ["pineLog"]
                         },
                         {
-                            title: "Gather Oak",
+                            title: "Oak Forest",
                             active: false,
                             action: "gatherMaterial",
                             requirement: {
@@ -202,7 +154,7 @@ export const DefaultData = {
                             variable: ["oakLog"]
                         },
                         {
-                            title: "Gather Walnut",
+                            title: "Walnut Forest",
                             active: false,
                             action: "gatherMaterial",
                             requirement: {
@@ -212,7 +164,7 @@ export const DefaultData = {
                             variable: ["walnutLog"]
                         },
                         {
-                            title: "Gather Ash",
+                            title: "Ash Forest",
                             active: false,
                             action: "gatherMaterial",
                             requirement: {
@@ -502,24 +454,18 @@ export const DefaultData = {
             // }
         },
         tools: {
-            // axe: {
-            //     properties: {
-            //         head: "material",
-            //         craftingRecipe: {
-            //             wood: 1,
-            //             mineral: 2
-            //         }
-            //     }
-            // }
             basket: {
                 title: "Basket",
                 type: "idk",
                 crafting: {
                     isCraftable: true,
                     requiredItems: {
-                        straw: 0,
-
+                        straw: 12,
                     }
+                },
+                dropRate: {
+                    straw: 70,
+                    clay: 25
                 }
             },
             // bucket: {
@@ -547,6 +493,10 @@ export const DefaultData = {
                 properties: {
                     condition: "Pristine",
                     durability: 100
+                },
+                dropRate: {
+                    log: 20,
+                    stick: 80
                 }
                 // station = firepit
                 // molds?
@@ -561,6 +511,10 @@ export const DefaultData = {
                         pineLog: 1,
                         copperIngot: 2
                     }
+                },
+                dropRate: {
+                    log: 30,
+                    stick: 70
                 }
                 // station = firepit (material)
                 
@@ -574,6 +528,10 @@ export const DefaultData = {
                         walnutLog: 1,
                         bronzeIngot: 2
                     }
+                },
+                dropRate: {
+                    log: 40,
+                    stick: 60
                 }
                 // station = (clay/adobe) furnace ) (material)
                 // ( two furnaces? )
@@ -587,6 +545,10 @@ export const DefaultData = {
                         oakLog: 1,
                         stone: 2
                     }
+                },
+                dropRate: {
+                    log: 60,
+                    stick: 40
                 }
                 // station = (clay/adobe) furnace
                 // anvil
@@ -600,6 +562,10 @@ export const DefaultData = {
                         oakLog: 1,
                         stone: 2
                     }
+                },
+                dropRate: {
+                    log: 75,
+                    stick: 25
                 }
                 // station = crucible furnace
             },
@@ -612,24 +578,13 @@ export const DefaultData = {
                         ashLog: 1,
                         stone: 2
                     }
+                },
+                dropRate: {
+                    log: 90,
+                    stick: 10,
                 }
                 // station = crucible furnace
             },
-
-
-
-
-
-
-            // pickaxe: {
-            //     properties: {
-            //         head: "material",
-            //         craftingRecipe: {
-            //             wood: 1,
-            //             mineral: 2
-            //         }
-            //     }
-            // }
 
             stonePickaxe: {
                 title: "Stone Pickaxe",
@@ -640,8 +595,112 @@ export const DefaultData = {
                         stick: 1,
                         stone: 3
                     }
+                },
+                properties: {
+                    condition: "Pristine",
+                    durability: 100
+                },
+                dropRate: {
+                    stone: 55,
+                    coal: 20,
+                    copperOre: 25
                 }
             },
+            copperPickaxe: {
+                title: "Copper Pickaxe",
+                type: "pickaxe",
+                // crafting: {} upgrading?
+                crafting: {
+                    isCraftable: true,
+                    requiredItems: {
+                        stick: 1,
+                        stone: 3
+                    }
+                },
+                dropRate: {
+                    stone: 0,
+                    coal: 0,
+                    copperOre: 0,
+                    tinOre: 0
+                }
+            },
+            bronzePickaxe: {
+                title: "Bronze Pickaxe",
+                type: "pickaxe",
+                crafting: {
+                    isCraftable: true,
+                    requiredItems: {
+                        stick: 1,
+                        stone: 3
+                    }
+                },
+                dropRate: {
+                    stone: 0,
+                    coal: 0,
+                    copperOre: 0,
+                    tinOre: 0,
+                    ironOre: 0
+                }
+            },
+            ironPickaxe: {
+                title: "Iron Pickaxe",
+                type: "pickaxe",
+                crafting: {
+                    isCraftable: true,
+                    requiredItems: {
+                        stick: 1,
+                        stone: 3
+                    }
+                },
+                dropRate: {
+                    stone: 0,
+                    coal: 0,
+                    copperOre: 0,
+                    tinOre: 0,
+                    ironOre: 0
+                }
+            },
+            steelPickaxe: {
+                title: "Steel Pickaxe",
+                type: "pickaxe",
+                crafting: {
+                    isCraftable: true,
+                    requiredItems: {
+                        stick: 1,
+                        stone: 3
+                    }
+                },
+                dropRate: {
+                    stone: 0,
+                    coal: 0,
+                    copperOre: 0,
+                    tinOre: 0,
+                    ironOre: 0,
+                    tungstenOre: 0
+                }
+            },
+            toolSteelPickaxe: {
+                title: "Tool Steel Pickaxe",
+                type: "pickaxe",
+                crafting: {
+                    isCraftable: true,
+                    requiredItems: {
+                        stick: 1,
+                        stone: 3
+                    }
+                },
+                dropRate: {
+                    stone: 0,
+                    coal: 0,
+                    copperOre: 0,
+                    tinOre: 0,
+                    ironOre: 0,
+                    tungstenOre: 0
+                }
+            },
+
+
+
         },
         idkTBD: {
             
