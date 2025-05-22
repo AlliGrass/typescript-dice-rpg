@@ -10,9 +10,14 @@ const CraftingWindow = () => {
     const { inventoryAddItem } = useInventoryStore()
 
     const addItemFunction = (itemID: string, requiredItems: [key: string]) => {
+        // const itemAdded = {
+        //     [itemID]: tools[itemID] 
+        // }
+        const { crafting, ...toolDetails} = tools[itemID]
         const itemAdded = {
-            [itemID]: tools[itemID].properties
+            [itemID]: toolDetails
         }
+
         const materialCost = Object.assign({}, ...Object.entries(requiredItems).map(([material, amount]) => {
             return {
                 [material]: {
@@ -23,6 +28,7 @@ const CraftingWindow = () => {
         }))
         inventoryAddItem(itemAdded, materialCost)
     }
+
 
     const getMaterialAmount = (resource: string): number => {
 

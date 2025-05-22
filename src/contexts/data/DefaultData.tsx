@@ -100,7 +100,8 @@ export const DefaultData = {
                         {
                             title: "Scavenge for Resources",
                             active: true,
-                            action: "scavengeTemplateFunction",
+                            action: "gatherMaterial",
+                            variable: ["straw", "container"]
                         },
                         {
                             title: "Hunt for Food",
@@ -132,7 +133,6 @@ export const DefaultData = {
                             action: "gatherMaterial",
                             variable: ["stick"]
                         },
-
                         {
                             title: "Pine Forest",
                             active: false,
@@ -141,7 +141,7 @@ export const DefaultData = {
                                 type: "tool",
                                 require: "stoneAxe"
                             },
-                            variable: ["pineLog"]
+                            variable: ["pineLog", "axe"]
                         },
                         {
                             title: "Oak Forest",
@@ -151,7 +151,7 @@ export const DefaultData = {
                                 type: "tool",
                                 require: "stoneAxe"
                             },
-                            variable: ["oakLog"]
+                            variable: ["oakLog", "axe"]
                         },
                         {
                             title: "Walnut Forest",
@@ -161,7 +161,7 @@ export const DefaultData = {
                                 type: "tool",
                                 require: "stoneAxe"
                             },
-                            variable: ["walnutLog"]
+                            variable: ["walnutLog", "axe"]
                         },
                         {
                             title: "Ash Forest",
@@ -171,7 +171,7 @@ export const DefaultData = {
                                 type: "tool",
                                 require: "stoneAxe"
                             },
-                            variable: ["ashLog"]
+                            variable: ["ashLog", "axe"]
                         },
                     ]
                 }
