@@ -25,6 +25,7 @@ I began learning TypeScript by wanting to remake my portfolio which included a P
 
 ## Development Notes
 ### Recently Implemented:
+- Unlockable crafting recipe (Tool based)
 - Singular tool at a time and tool properties.
 - Inventory & Crafting Windows with responsive craft buttons based on available materials.
 - Crafting function that removes relevant materials ands crafted item to player inventory.
@@ -41,7 +42,7 @@ I began learning TypeScript by wanting to remake my portfolio which included a P
 - **Unoptimised Performance**:
   - Affected Files: `BasePage`, Hook/Store files
   - Status: Functional.
-  - Plan: Reorganise when fundamental features have been implemented.
+  - Plan: Reorganise when fundamental features have been implemented. (Memoisation included)
 
 ### Incoming Development:
 - Unlockable actions and locations (Not visible until conditions met)

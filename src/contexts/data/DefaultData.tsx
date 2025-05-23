@@ -458,8 +458,7 @@ export const DefaultData = {
                 title: "Basket",
                 type: "idk",
                 crafting: {
-                    isCraftable: true,
-                    requiredItems: {
+                    requiredMaterial: {
                         straw: 12,
                     }
                 },
@@ -468,26 +467,30 @@ export const DefaultData = {
                     clay: 25
                 }
             },
-            // bucket: {
-            //     title: "Bucket",
-            //     type: "idk",
-            //     crafting: {
-            //         isCraftable: true,
-            //         requiredItems: {
-            //             basket: 1,
-            //             clay: 1
-            //         }
-            //     }
-            // },
+            bucket: {
+                title: "Bucket",
+                type: "idk",
+                crafting: {
+                    requiredMaterial: {
+                        clay: 1
+                    },
+                    requiredUnlock: {
+                        // station: "",
+                        tool: "basket"
+                    }
+                }
+            },
 
             stoneAxe: {
                 title: "Stone Axe",
                 type: "axe",
                 crafting: {
-                    isCraftable: true,
-                    requiredItems: {
+                    requiredMaterial: {
                         stick: 1,
                         stone: 2
+                    },
+                    requiredUnlock: {
+                        // station: "", // firepit
                     }
                 },
                 properties: {
@@ -506,10 +509,13 @@ export const DefaultData = {
                 title: "Copper Axe",
                 type: "axe",
                 crafting: {
-                    isCraftable: true,
-                    requiredItems: {
+                    requiredMaterial: {
                         pineLog: 1,
                         copperIngot: 2
+                    },
+                    requiredUnlock: {
+                        // station: "",
+                        tool: "stoneAxe"
                     }
                 },
                 dropRate: {
@@ -523,10 +529,13 @@ export const DefaultData = {
                 title: "Bronze Axe",
                 type: "axe",
                 crafting: {
-                    isCraftable: true,
-                    requiredItems: {
+                    requiredMaterial: {
                         walnutLog: 1,
                         bronzeIngot: 2
+                    },
+                    requiredUnlock: {
+                        // station: "",
+                        tool: "copperAxe"
                     }
                 },
                 dropRate: {
@@ -540,10 +549,13 @@ export const DefaultData = {
                 title: "Iron Axe",
                 type: "axe",
                 crafting: {
-                    isCraftable: true,
-                    requiredItems: {
+                    requiredMaterial: {
                         oakLog: 1,
                         stone: 2
+                    },
+                    requiredUnlock: {
+                        // station: "",
+                        tool: "bronzeAxe"
                     }
                 },
                 dropRate: {
@@ -557,10 +569,13 @@ export const DefaultData = {
                 title: "Steel Axe",
                 type: "axe",
                 crafting: {
-                    isCraftable: true,
-                    requiredItems: {
+                    requiredMaterial: {
                         oakLog: 1,
                         stone: 2
+                    },
+                    requiredUnlock: {
+                        // station: "",
+                        tool: "ironAxe"
                     }
                 },
                 dropRate: {
@@ -573,10 +588,13 @@ export const DefaultData = {
                 title: "Tool Steel Axe",
                 type: "axe",
                 crafting: {
-                    isCraftable: true,
-                    requiredItems: {
+                    requiredMaterial: {
                         ashLog: 1,
                         stone: 2
+                    },
+                    requiredUnlock: {
+                        // station: "",
+                        tool: "steelAxe"
                     }
                 },
                 dropRate: {
@@ -590,10 +608,12 @@ export const DefaultData = {
                 title: "Stone Pickaxe",
                 type: "pickaxe",
                 crafting: {
-                    isCraftable: true,
-                    requiredItems: {
+                    requiredMaterial: {
                         stick: 1,
                         stone: 3
+                    },
+                    requiredUnlock: {
+                        // station: "", // firepit
                     }
                 },
                 properties: {
@@ -611,10 +631,13 @@ export const DefaultData = {
                 type: "pickaxe",
                 // crafting: {} upgrading?
                 crafting: {
-                    isCraftable: true,
-                    requiredItems: {
-                        stick: 1,
-                        stone: 3
+                    requiredMaterial: {
+                        pineLog: 1,
+                        copperIngot: 3
+                    },
+                    requiredUnlock: {
+                        // station: "",
+                        tool: "stonePickaxe"
                     }
                 },
                 dropRate: {
@@ -628,10 +651,13 @@ export const DefaultData = {
                 title: "Bronze Pickaxe",
                 type: "pickaxe",
                 crafting: {
-                    isCraftable: true,
-                    requiredItems: {
-                        stick: 1,
-                        stone: 3
+                    requiredMaterial: {
+                        walnutLog: 1,
+                        bronzeIngot: 3
+                    },
+                    requiredUnlock: {
+                        // station: "",
+                        tool: "copperPickaxe"
                     }
                 },
                 dropRate: {
@@ -646,10 +672,13 @@ export const DefaultData = {
                 title: "Iron Pickaxe",
                 type: "pickaxe",
                 crafting: {
-                    isCraftable: true,
-                    requiredItems: {
-                        stick: 1,
+                    requiredMaterial: {
+                        oakLog: 1,
                         stone: 3
+                    },
+                    requiredUnlock: {
+                        // station: "",
+                        tool: "bronzePickaxe"
                     }
                 },
                 dropRate: {
@@ -664,10 +693,13 @@ export const DefaultData = {
                 title: "Steel Pickaxe",
                 type: "pickaxe",
                 crafting: {
-                    isCraftable: true,
-                    requiredItems: {
-                        stick: 1,
+                    requiredMaterial: {
+                        oakLog: 1,
                         stone: 3
+                    },
+                    requiredUnlock: {
+                        // station: "",
+                        tool: "ironPickaxe"
                     }
                 },
                 dropRate: {
@@ -683,10 +715,13 @@ export const DefaultData = {
                 title: "Tool Steel Pickaxe",
                 type: "pickaxe",
                 crafting: {
-                    isCraftable: true,
-                    requiredItems: {
-                        stick: 1,
+                    requiredMaterial: {
+                        ashLog: 1,
                         stone: 3
+                    },
+                    requiredUnlock: {
+                        // station: "",
+                        tool: "steelPickaxe"
                     }
                 },
                 dropRate: {
@@ -708,8 +743,7 @@ export const DefaultData = {
                 title: "Bellows",
                 type: "idk",
                 crafting: {
-                    isCraftable: true,
-                    requiredItems: {
+                    requiredMaterial: {
                         wood: 2,
                         hide: 1, // leather
                         clay: 1,
@@ -723,20 +757,20 @@ export const DefaultData = {
         home: {
             fire: {
                 title: "Fire",
-                requiredItems:{
+                requiredMaterial:{
                     stick: 5,
                 }
             },
             firePit: {
                 title: "Fire Pit",
-                requiredItems: {
+                requiredMaterial: {
                     stick: 3,
                     stone: 5
                 }
             },
             craftingBench: {
                 title: "Crafting Bench",
-                requiredItems: {
+                requiredMaterial: {
                     wood: 0,
                     walnut: 0,
                     bronze: 0,
@@ -748,7 +782,7 @@ export const DefaultData = {
             },
             clayFurnace: {
                 title: "Furnace",
-                requiredItems: {
+                requiredMaterial: {
                     clay: 3,
                     straw: 0,
                     sand: 0,
@@ -759,7 +793,7 @@ export const DefaultData = {
             },
             crucibleFurnace: {
                 title: "Crucible Furnace",
-                requiredItems: {
+                requiredMaterial: {
                     // crucible (clay/graphite)
                 }
             }
