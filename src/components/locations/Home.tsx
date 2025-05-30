@@ -1,14 +1,22 @@
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import CraftingWindow from "../CraftingWindow"
+import { useInventoryStore } from "../../stores/useInventoryStore"
 
 
 const Home = () => {
 
     const [craftingWindowVisibility, setCraftingWindowVisibility] = useState<boolean>(false)
 
+    const playerInventory = useInventoryStore()
+
+    const homeTitle = useMemo(() => (
+        playerInventory.structure.home.title === "" ? "Camp" : playerInventory.structure.home.title + playerInventory.structure.home.tier
+    ), [playerInventory])
+
     return (
         <div>
-            <h1>Home</h1>
+            <h1>{homeTitle}</h1>
+
             <button onClick={() => {setCraftingWindowVisibility(!craftingWindowVisibility)}}>craft</button>
 
             <section style={{

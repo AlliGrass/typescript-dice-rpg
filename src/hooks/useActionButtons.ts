@@ -9,15 +9,25 @@ type ActionButtonType = {
   
 export const useActionButtons = (): ActionButtonType => {
     const { checkActionAttempt, rollDice } = useDiceStore()
-    const { inventoryUpdateMaterial } = useInventoryStore()
+    const { inventoryUpdateMaterial, inventoryUpgradeStructure } = useInventoryStore()
     const playerInventory = useInventoryStore()
-    const { items: { resources, tools } } = useDefaults()
+    const { items: { resources, tools }, structures } = useDefaults()
 
-    const getDropRate = (toolDetails: any) => { 
-        return [Object.keys(toolDetails.dropRate), Object.values(toolDetails.dropRate)]
+    const allResources = { //util
+        ...resources.naturalMaterials,
+        ...resources.craftedMaterials
     }
 
-    const gatherMaterial = (resource: any, toolType?: any) => { // log ???
+    const getDropRate = (toolDetails: any) => { 
+        return [Object.keys(toolDetails.properties.dropRate), Object.values(toolDetails.properties.dropRate)]
+    }
+
+    const getMaterialPath = () => {
+
+        return
+    }
+
+    const gatherMaterial = (resource: any, toolType?: any): void => { // log ???
         const haveTool = toolType ? Object.entries(playerInventory.tool).find(([toolName, toolDetails]) => toolDetails.type === toolType) : undefined
         const dropRate = haveTool? getDropRate(haveTool[1]) : [[resource], [100]]
 
@@ -27,10 +37,25 @@ export const useActionButtons = (): ActionButtonType => {
         for (let materialIndex = 0; materialIndex < dropRateMaterials.length; materialIndex++) {
             cumulativeProbability += dropRateProbabilities[materialIndex]
             const material = dropRateMaterials[materialIndex] == "log"? resource : dropRateMaterials[materialIndex]
-            const materialPath = resources[material].path
-            const materialKey = resources[material].itemKey
+            const materialPath = allResources[material].path
+            const materialKey = allResources[material].itemKey
             if (cumulativeProbability > dropRateRoll) inventoryUpdateMaterial(materialKey, materialPath, rollDice(2, true))
         }
+    }
+
+    const buildStructure = (structureID: string) => {
+        const currentStructureTier = playerInventory.structure.home.tier
+
+        // remove materials from inventory
+        Object.entries(structures[structureID][currentStructureTier+1].requiredMaterial).forEach(([material, amount]) => {
+            const materialPath = allResources[material].path
+            const materialKey = allResources[material].itemKey
+            inventoryUpdateMaterial(materialKey, materialPath, -amount)
+        })
+        
+        // unlock structure
+        console.log(structures[structureID][currentStructureTier+1].requiredMaterial)
+        inventoryUpgradeStructure(structureID, [structures[structureID][currentStructureTier+1].title, structures[structureID][currentStructureTier+1].structureID])
     }
 
     const templateFunction = () => {
@@ -40,6 +65,7 @@ export const useActionButtons = (): ActionButtonType => {
 
     return {
         gatherMaterial: (resource: string, toolType?: string) => gatherMaterial(resource, toolType),
+        buildStructure: (structureID: string, location: string) => buildStructure(structureID, location),
         templateFunction: () => templateFunction()
     };
 };

@@ -9,12 +9,19 @@ const itemPath = {
     tool: ["tool"]
 } 
 
+
 export const DefaultData = {
     initial: {
         page: {
             locations: {
                 home: {
                     title: "Home",
+
+
+
+                    
+
+
                     buttons: [
                         {
                             title: "Start Fire",
@@ -26,19 +33,11 @@ export const DefaultData = {
                             active: true,
                             action: "templateFunction"
                         },
-                        {
-                            title: "Build Structure",
+                        { // ??
+                            title: "Upgrade Home", // Build Fire Pit
                             active: true,
-                            action: "templateFunction"
-                        },
-                        {
-                            title: "Expand",
-                            active: false,
-                            requirement: {
-                                type: "tool", // structure
-                                require: "firePit"
-                            },
-                            action: "templateFunction"
+                            action: "buildStructure",
+                            variable: ["home"]
                         },
                         {
                             title: "Merchant",
@@ -190,552 +189,478 @@ export const DefaultData = {
     },
     items: {
         resources: {
-            // Wood
-            stick: {
-                title: "Stick",
-                itemKey: "stick",
-                path: itemPath.wood,
-            },
-            // Logs
-            pineLog: {
-                title: "Pine Log",
-                itemKey: "pine",
-                path: itemPath.log,
-            },
-            oakLog: {
-                title: "Oak Log", 
-                itemKey: "oak",   
-                path: itemPath.log,
-            },
-            walnutLog: {
-                title: "Walnut Log", 
-                itemKey: "walnut",
-                path: itemPath.log,
-            },
-            ashLog: {
-                title: "Ash Log", 
-                itemKey: "ash",
-                path: itemPath.log,
-            },
-            // Plank
-            pinePlank: {
-                title: "Pine Plank", 
-                itemKey: "pine",  
-                path: itemPath.plank,
-            },
-            oakPlank: {
-                title: "Oak Plank", 
-                itemKey: "oak",  
-                path: itemPath.plank,
-            },
-            walnutPlank: {
-                title: "Walnut Plank", 
-                itemKey: "walnut",  
-                path: itemPath.plank,
-            },
-            ashPlank: {
-                title: "Ash Plank", 
-                itemKey: "ash",  
-                path: itemPath.plank,
-            },
+            naturalMaterials: {
+                // Wood
+                stick: {
+                    title: "Stick",
+                    itemKey: "stick",
+                    path: itemPath.wood,
+                },
+                // Logs
+                pineLog: {
+                    title: "Pine Log",
+                    itemKey: "pine",
+                    path: itemPath.log,
+                },
+                oakLog: {
+                    title: "Oak Log", 
+                    itemKey: "oak",   
+                    path: itemPath.log,
+                },
+                walnutLog: {
+                    title: "Walnut Log", 
+                    itemKey: "walnut",
+                    path: itemPath.log,
+                },
+                ashLog: {
+                    title: "Ash Log", 
+                    itemKey: "ash",
+                    path: itemPath.log,
+                },
+                // Plank
+                pinePlank: {
+                    title: "Pine Plank", 
+                    itemKey: "pine",  
+                    path: itemPath.plank,
+                },
+                oakPlank: {
+                    title: "Oak Plank", 
+                    itemKey: "oak",  
+                    path: itemPath.plank,
+                },
+                walnutPlank: {
+                    title: "Walnut Plank", 
+                    itemKey: "walnut",  
+                    path: itemPath.plank,
+                },
+                ashPlank: {
+                    title: "Ash Plank", 
+                    itemKey: "ash",  
+                    path: itemPath.plank,
+                },
 
-            // Minerals
-            stone: {
-                title: "Stone",   
-                itemKey: "stone", // Added itemKey
-                path: itemPath.mineral,
+                // Minerals
+                stone: {
+                    title: "Stone",   
+                    itemKey: "stone", // Added itemKey
+                    path: itemPath.mineral,
+                },
+                coal: {
+                    title: "Coal",    
+                    itemKey: "coal",  // Added itemKey
+                    path: itemPath.mineral,
+                },
+                // Ore
+                copperOre: {
+                    title: "Copper Ore",
+                    itemKey: "copper",
+                    path: itemPath.ore,
+                },
+                tinOre: {
+                    title: "Tin Ore",   
+                    itemKey: "tin",  
+                    path: itemPath.ore,
+                },
+                ironOre: {
+                    title: "Iron Ore",  
+                    itemKey: "iron", 
+                    path: itemPath.ore,
+                },
+                cobaltOre: {
+                    title: "Cobalt Ore", 
+                    itemKey: "cobalt",
+                    path: itemPath.ore,
+                },
+                tungstenOre: {
+                    title: "Tungsten Ore", 
+                    itemKey: "tungsten",
+                    path: itemPath.ore,
+                },
+                // Forage
+                clay: {
+                    title: "Clay",    
+                    itemKey: "clay",  // Added itemKey
+                    path: itemPath.forage,
+                },
+                straw: {
+                    title: "Straw",   
+                    itemKey: "straw", // Added itemKey
+                    path: itemPath.forage,
+                },
             },
-            coal: {
-                title: "Coal",    
-                itemKey: "coal",  // Added itemKey
-                path: itemPath.mineral,
+            craftedMaterials: {
+                // Ingot
+                copperIngot: {
+                    title: "Copper Ingot", 
+                    itemKey: "copper",  
+                    requiredMaterial: {
+                        copperOre: 0,
+                    },
+                    requiredUnlock: {
+                        furnace: 1
+                    },
+                    path: itemPath.ingot,
+                },
+                bronzeIngot: {
+                    title: "Bronze Ingot", 
+                    itemKey: "bronze",  
+                    requiredMaterial: {
+                        copperOre: 0,
+                        tinOre: 0,
+                    },
+                    requiredUnlock: {
+                        furnace: 1
+                    },
+                    path: itemPath.ingot,
+                },
+                ironIngot: {
+                    title: "Iron Ingot",   
+                    itemKey: "iron",    
+                    requiredMaterial: {
+                        copperOre: 0,
+                    },
+                    requiredUnlock: {
+                        furnace: 1
+                    },
+                    path: itemPath.ingot,
+                },
+                steelIngot: {
+                    title: "Steel Ingot",
+                    itemKey: "steel",
+                    requiredMaterial: {
+                        ironOre: 0,
+                        coal: 0
+                    },
+                    requiredUnlock: {
+                        furnace: 1
+                    },
+                },
+                toolSteelIngot: {
+                    title: "Tool Steel Ingot",
+                    itemKey: "toolSteel",
+                    requiredMaterial: {
+                        ironOre: 0,
+                        tungstenOre: 0,
+                        coal: 0
+                    },
+                    requiredUnlock: {
+                        furnace: 1
+                    },
+                },
+                tungstenIngot: {
+                    title: "Tungsten Ingot", 
+                    itemKey: "tungsten",  
+                    requiredMaterial: {
+                        tungstenOre: 0,
+                        cobaltOre: 0,
+                        coal: 0
+                    },
+                    requiredUnlock: {
+                        furnace: 1
+                    },
+                    path: itemPath.ingot,
+                },
             },
-            // Ore
-            copperOre: {
-                title: "Copper Ore",
-                itemKey: "copper",
-                path: itemPath.ore,
-            },
-            tinOre: {
-                title: "Tin Ore",   
-                itemKey: "tin",  
-                path: itemPath.ore,
-            },
-            ironOre: {
-                title: "Iron Ore",  
-                itemKey: "iron", 
-                path: itemPath.ore,
-            },
-            cobaltOre: {
-                title: "Cobalt Ore", 
-                itemKey: "cobalt",
-                path: itemPath.ore,
-            },
-            tungstenOre: {
-                title: "Tungsten Ore", 
-                itemKey: "tungsten",
-                path: itemPath.ore,
-            },
-            // Ingot
-            copperIngot: {
-                title: "Copper Ingot", 
-                itemKey: "copper",  
-                path: itemPath.ingot,
-            },
-            bronzeIngot: {
-                title: "Bronze Ingot", 
-                itemKey: "bronze",  
-                path: itemPath.ingot,
-            },
-            ironIngot: {
-                title: "Iron Ingot",   
-                itemKey: "iron",    
-                path: itemPath.ingot,
-            },
-            tungstenIngot: {
-                title: "Tungsten Ingot", 
-                itemKey: "tungsten",  
-                path: itemPath.ingot,
-            },
+            
 
-            // Forage
-            clay: {
-                title: "Clay",    
-                itemKey: "clay",  // Added itemKey
-                path: itemPath.forage,
-            },
-            straw: {
-                title: "Straw",   
-                itemKey: "straw", // Added itemKey
-                path: itemPath.forage,
-            },
-
-            // Craftable Items
-            basket: {
-                title: "Basket",
-                itemKey: "basket",
-                path: itemPath.tool,
-            }  
 
 
-            // account for new log/plank ore/ingots setup (WRITE ITEM PATHS FOR INVENTORY AND CRAFTING)
 
-            // pine: {
-            //     title: "Pine",
-            //     type: "wood",
 
-            // },
-            // walnut: { // issue if walnuts (nut) are added later
-            //     title: "Walnut",
-            //     type: "wood",
 
-            // },
-            // oak: {
-            //     title: "Oak",
-            //     type: "wood"
-            // },
-            // ash: { // potential issue if ash (powder) is added later
-            //     title: "Ash",
-            //     type: "wood"
-            // },
-            // copper: {
-            //     title: "Copper",
-            //     type: "mineral",
-            //     processing: {
-            //         isProcessable: false
-            //         // hammar, smelt
-            //     }
-            // },
-            // tin: {
-            //     title: "Tin",
-            //     type: "mineral",
-            //     processing: {
-            //         isProcessable: false
-            //     }
-            // },
-            // iron: {
-            //     title: "Iron",
-            //     type: "mineral",
-            //     processing: {
-            //         isProcessable: false
-            //     }
-            // },
-            // cobalt: {
-            //     title: "Cobalt",
-            //     type: "mineral",
-            //     processing: {
-            //         isProcessable: false
-            //     }
-            // },
-            // tungsten: {
-            //     title: "Tungsten",
-            //     type: "mineral",
-            //     processing: {
-            //         isProcessable: false
-            //     }
-            // },
-            // diamond: {
-            //     title: "Diamond",
-            //     type: "mineral",
-            //     processing: {
-            //         isProcessable: true,
-            //         requiredResources: {
-            //             graphite: 0,
-            //             cobalt: 0
-            //         },
-            //         station: ""
-            //     }
-            // },
-            // bronze: {
-            //     title: "Bronze",
-            //     type: "mineral",
-            //     processing: {
-            //         isProcessable: true,
-            //         requiredResources: {
-            //             copper: 0,
-            //             tin: 0
-            //         },
-            //         station: ""
-            //         // smelt
-            //     }
-            //     // properties: {durability: notation}
-            // },
-            // castIron: {
-            //     title: "Cast Iron",
-            //     type: "mineral",
-            //     processing: {
-            //         isProcessable: true,
-            //         requiredResources: {
-            //             iron: 0
-            //         },
-            //         station: ""
-            //         // smelt
-            //     }
-            // },
-            // steel: {
-            //     title: "Steel",
-            //     type: "mineral",
-            //     processing: {
-            //         isProcessable: true,
-            //         requiredResources: {
-            //             iron: 0,
-            //             coal: 0
-            //         },
-            //         station: ""
-            //     }
-            //     // smelt
-            // },
-            // toolSteel: {
-            //     title: "Tool Steel",
-            //     type: "mineral",
-            //     processing: {
-            //         isProcessable: true,
-            //         requiredResources: {
-            //             iron: 0,
-            //             tungsten: 0
-            //         },
-            //         station: ""
-            //     }
-            //     // smelt
-            // },
-            // tungstenCarbide: {
-            //     title: "Tungsten Carbide",
-            //     type: "mineral",
-            //     processing: {
-            //         isProcessable: true,
-            //         requiredResources: {
-            //             tungsten: 0,
-            //             cobalt: 0,
-            //             coal: 0
-            //         },
-            //         station: ""
-            //     }
-            //     // crush, smelt
-            // }
+
+
+
         },
         tools: {
-            basket: {
-                title: "Basket",
-                type: "idk",
-                crafting: {
-                    requiredMaterial: {
-                        straw: 12,
-                    }
-                },
-                dropRate: {
-                    straw: 70,
-                    clay: 25
-                }
-            },
-            bucket: {
-                title: "Bucket",
-                type: "idk",
-                crafting: {
-                    requiredMaterial: {
-                        clay: 1
+            container: {
+                1: {
+                    title: "Basket",
+                    crafting: {
+                        requiredMaterial: {
+                            straw: 12,
+                        }
                     },
-                    requiredUnlock: {
-                        // station: "",
-                        tool: "basket"
+                    properties: {
+                        dropRate: {
+                            straw: 70,
+                            clay: 25
+                        }
                     }
-                }
-            },
-
-            stoneAxe: {
-                title: "Stone Axe",
-                type: "axe",
-                crafting: {
-                    requiredMaterial: {
-                        stick: 1,
-                        stone: 2
+                    
+                },
+                2: {
+                    title: "Bucket",
+                    crafting: {
+                        requiredMaterial: {
+                            clay: 1
+                        },
+                        requiredUnlock: {
+                            home: 1
+                        }
                     },
-                    requiredUnlock: {
-                        // station: "", // firepit
+                    properties: {
+                        dropRate: {}
                     }
-                },
-                properties: {
-                    condition: "Pristine",
-                    durability: 100
-                },
-                dropRate: {
-                    log: 20,
-                    stick: 80
                 }
-                // station = firepit
-                // molds?
             },
-
-            copperAxe: {
-                title: "Copper Axe",
-                type: "axe",
-                crafting: {
-                    requiredMaterial: {
-                        pineLog: 1,
-                        copperIngot: 2
+            axe: {
+                1: {
+                    title: "Stone Axe",
+                    crafting: {
+                        requiredMaterial: {
+                            stick: 1,
+                            stone: 2
+                        },
+                        requiredUnlock: {
+                            home: 1 // firePit
+                        }
                     },
-                    requiredUnlock: {
-                        // station: "",
-                        tool: "stoneAxe"
+                    properties: {
+                        condition: "Pristine",
+                        durability: 100,
+                        dropRate: {
+                            log: 20,
+                            stick: 80
+                        }
                     }
                 },
-                dropRate: {
-                    log: 30,
-                    stick: 70
-                }
-                // station = firepit (material)
-                
-            },
-            bronzeAxe: {
-                title: "Bronze Axe",
-                type: "axe",
-                crafting: {
-                    requiredMaterial: {
-                        walnutLog: 1,
-                        bronzeIngot: 2
+                2: {
+                    title: "Copper Axe",
+                    crafting: {
+                        requiredMaterial: {
+                            pineLog: 1,
+                            copperIngot: 2
+                        },
+                        requiredUnlock: {
+                            crafting: 1,
+                            tool: "stoneAxe"
+                        }
                     },
-                    requiredUnlock: {
-                        // station: "",
-                        tool: "copperAxe"
+                    properties: {
+                        dropRate: {
+                            log: 30,
+                            stick: 70
+                        }
                     }
                 },
-                dropRate: {
-                    log: 40,
-                    stick: 60
-                }
-                // station = (clay/adobe) furnace ) (material)
-                // ( two furnaces? )
-            },
-            ironAxe: {
-                title: "Iron Axe",
-                type: "axe",
-                crafting: {
-                    requiredMaterial: {
-                        oakLog: 1,
-                        stone: 2
+                3: {
+                    title: "Bronze Axe",
+                    crafting: {
+                        requiredMaterial: {
+                            walnutLog: 1,
+                            bronzeIngot: 2
+                        },
+                        requiredUnlock: {
+                            // station: "",
+                            tool: "copperAxe"
+                        }
                     },
-                    requiredUnlock: {
-                        // station: "",
-                        tool: "bronzeAxe"
+                    properties: {
+                        dropRate: {
+                            log: 40,
+                            stick: 60
+                        }
                     }
+                    // station = (clay/adobe) furnace ) (material)
+                    // ( two furnaces? )
                 },
-                dropRate: {
-                    log: 60,
-                    stick: 40
-                }
-                // station = (clay/adobe) furnace
-                // anvil
-            },
-            steelAxe: {
-                title: "Steel Axe",
-                type: "axe",
-                crafting: {
-                    requiredMaterial: {
-                        oakLog: 1,
-                        stone: 2
+                4: {
+                    title: "Iron Axe",
+                    crafting: {
+                        requiredMaterial: {
+                            oakLog: 1,
+                            stone: 2
+                        },
+                        requiredUnlock: {
+                            // station: "",
+                            tool: "bronzeAxe"
+                        }
                     },
-                    requiredUnlock: {
-                        // station: "",
-                        tool: "ironAxe"
+                    properties: {
+                        dropRate: {
+                            log: 60,
+                            stick: 40
+                        }
                     }
+                    // station = (clay/adobe) furnace
+                    // anvil
                 },
-                dropRate: {
-                    log: 75,
-                    stick: 25
-                }
-                // station = crucible furnace
-            },
-            toolSteelAxe: {
-                title: "Tool Steel Axe",
-                type: "axe",
-                crafting: {
-                    requiredMaterial: {
-                        ashLog: 1,
-                        stone: 2
+                5: {
+                    title: "Steel Axe",
+                    crafting: {
+                        requiredMaterial: {
+                            oakLog: 1,
+                            stone: 2
+                        },
+                        requiredUnlock: {
+                            // station: "",
+                            tool: "ironAxe"
+                        }
                     },
-                    requiredUnlock: {
-                        // station: "",
-                        tool: "steelAxe"
+                    properties: {
+                        dropRate: {
+                            log: 75,
+                            stick: 25
+                        }
                     }
+                    // station = crucible furnace
                 },
-                dropRate: {
-                    log: 90,
-                    stick: 10,
-                }
-                // station = crucible furnace
-            },
-
-            stonePickaxe: {
-                title: "Stone Pickaxe",
-                type: "pickaxe",
-                crafting: {
-                    requiredMaterial: {
-                        stick: 1,
-                        stone: 3
+                6: {
+                    title: "Tool Steel Axe",
+                    crafting: {
+                        requiredMaterial: {
+                            ashLog: 1,
+                            stone: 2
+                        },
+                        requiredUnlock: {
+                            // station: "",
+                            tool: "steelAxe"
+                        }
                     },
-                    requiredUnlock: {
-                        // station: "", // firepit
+                    properties: {
+                        dropRate: {
+                            log: 90,
+                            stick: 10,
+                        }
                     }
-                },
-                properties: {
-                    condition: "Pristine",
-                    durability: 100
-                },
-                dropRate: {
-                    stone: 55,
-                    coal: 20,
-                    copperOre: 25
+                    // station = crucible furnace
                 }
             },
-            copperPickaxe: {
-                title: "Copper Pickaxe",
-                type: "pickaxe",
-                // crafting: {} upgrading?
-                crafting: {
-                    requiredMaterial: {
-                        pineLog: 1,
-                        copperIngot: 3
+            pickaxe: {
+                1: {
+                    title: "Stone Pickaxe",
+                    crafting: {
+                        requiredMaterial: {
+                            stick: 1,
+                            stone: 3
+                        },
+                        requiredUnlock: {
+                            home: 1, // firePit,
+                        }
                     },
-                    requiredUnlock: {
-                        // station: "",
-                        tool: "stonePickaxe"
+                    properties: {
+                        condition: "Pristine",
+                        durability: 100,
+                        dropRate: {
+                            stone: 55,
+                            coal: 20,
+                            copperOre: 25
+                        }
                     }
                 },
-                dropRate: {
-                    stone: 0,
-                    coal: 0,
-                    copperOre: 0,
-                    tinOre: 0
-                }
-            },
-            bronzePickaxe: {
-                title: "Bronze Pickaxe",
-                type: "pickaxe",
-                crafting: {
-                    requiredMaterial: {
-                        walnutLog: 1,
-                        bronzeIngot: 3
+                2: {
+                    title: "Copper Pickaxe",
+                    crafting: {
+                        requiredMaterial: {
+                            pineLog: 1,
+                            copperIngot: 3
+                        },
+                        requiredUnlock: {
+                            // station: "",
+                            tool: "stonePickaxe"
+                        }
                     },
-                    requiredUnlock: {
-                        // station: "",
-                        tool: "copperPickaxe"
+                    properties: {
+                        dropRate: {
+                            stone: 0,
+                            coal: 0,
+                            copperOre: 0,
+                            tinOre: 0
+                        }
                     }
                 },
-                dropRate: {
-                    stone: 0,
-                    coal: 0,
-                    copperOre: 0,
-                    tinOre: 0,
-                    ironOre: 0
-                }
-            },
-            ironPickaxe: {
-                title: "Iron Pickaxe",
-                type: "pickaxe",
-                crafting: {
-                    requiredMaterial: {
-                        oakLog: 1,
-                        stone: 3
+                3: {
+                    title: "Bronze Pickaxe",
+                    crafting: {
+                        requiredMaterial: {
+                            walnutLog: 1,
+                            bronzeIngot: 3
+                        },
+                        requiredUnlock: {
+                            // station: "",
+                            tool: "copperPickaxe"
+                        }
                     },
-                    requiredUnlock: {
-                        // station: "",
-                        tool: "bronzePickaxe"
+                    properties: {
+                        dropRate: {
+                            stone: 0,
+                            coal: 0,
+                            copperOre: 0,
+                            tinOre: 0,
+                            ironOre: 0
+                        }
                     }
                 },
-                dropRate: {
-                    stone: 0,
-                    coal: 0,
-                    copperOre: 0,
-                    tinOre: 0,
-                    ironOre: 0
-                }
-            },
-            steelPickaxe: {
-                title: "Steel Pickaxe",
-                type: "pickaxe",
-                crafting: {
-                    requiredMaterial: {
-                        oakLog: 1,
-                        stone: 3
+                4: {
+                    title: "Iron Pickaxe",
+                    crafting: {
+                        requiredMaterial: {
+                            oakLog: 1,
+                            stone: 3
+                        },
+                        requiredUnlock: {
+                            // station: "",
+                            tool: "bronzePickaxe"
+                        }
                     },
-                    requiredUnlock: {
-                        // station: "",
-                        tool: "ironPickaxe"
+                    properties: {
+                        dropRate: {
+                            stone: 0,
+                            coal: 0,
+                            copperOre: 0,
+                            tinOre: 0,
+                            ironOre: 0
+                        }
                     }
                 },
-                dropRate: {
-                    stone: 0,
-                    coal: 0,
-                    copperOre: 0,
-                    tinOre: 0,
-                    ironOre: 0,
-                    tungstenOre: 0
-                }
-            },
-            toolSteelPickaxe: {
-                title: "Tool Steel Pickaxe",
-                type: "pickaxe",
-                crafting: {
-                    requiredMaterial: {
-                        ashLog: 1,
-                        stone: 3
+                5: {
+                    title: "Steel Pickaxe",
+                    crafting: {
+                        requiredMaterial: {
+                            oakLog: 1,
+                            stone: 3
+                        },
+                        requiredUnlock: {
+                            // station: "",
+                            tool: "ironPickaxe"
+                        }
                     },
-                    requiredUnlock: {
-                        // station: "",
-                        tool: "steelPickaxe"
+                    properties: {
+                        dropRate: {
+                            stone: 0,
+                            coal: 0,
+                            copperOre: 0,
+                            tinOre: 0,
+                            ironOre: 0,
+                            tungstenOre: 0
+                        }
                     }
                 },
-                dropRate: {
-                    stone: 0,
-                    coal: 0,
-                    copperOre: 0,
-                    tinOre: 0,
-                    ironOre: 0,
-                    tungstenOre: 0
+                6: {
+                    title: "Tool Steel Pickaxe",
+                    crafting: {
+                        requiredMaterial: {
+                            ashLog: 1,
+                            stone: 3
+                        },
+                        requiredUnlock: {
+                            // station: "",
+                            tool: "steelPickaxe"
+                        }
+                    },
+                    properties: {
+                        dropRate: {
+                            stone: 0,
+                            coal: 0,
+                            copperOre: 0,
+                            tinOre: 0,
+                            ironOre: 0,
+                            tungstenOre: 0
+                        }
+                    }
                 }
-            },
-
-
-
+            }
         },
         idkTBD: {
             
@@ -755,49 +680,76 @@ export const DefaultData = {
     },
     structures: {
         home: {
-            fire: {
-                title: "Fire",
-                requiredMaterial:{
-                    stick: 5,
-                }
-            },
-            firePit: {
+            // firepit: false,
+            // shack: false,
+            // cabin: false,
+            // cottage: false,
+            // bungalow: false,
+            // villa: false,
+            // mansion: false,
+            // estate: false
+            1: {
                 title: "Fire Pit",
                 requiredMaterial: {
                     stick: 3,
                     stone: 5
                 }
             },
-            craftingBench: {
+            2: {
+                title: "Shack",
+                requiredMaterial: {
+
+                },
+                requiredUnlock: {
+                    tools: ["axe"]
+                }
+            },
+            3: {
+                title: "Cabin",
+                requiredMaterial: {
+
+                },
+                requiredUnlock: {
+
+                }
+            },
+        },
+        crafting: {
+            1: {
                 title: "Crafting Bench",
                 requiredMaterial: {
-                    wood: 0,
-                    walnut: 0,
-                    bronze: 0,
-                    // table (wood)
-                    // tools (wood/stick, minerals)
-                    // upgradable (tools)
+
                 },
-                requiredTools: ["axe"]
+                requiredUnlock: {
+                    tools: ["axe"], 
+                }
             },
-            clayFurnace: {
-                title: "Furnace",
+            2: {
+                title: "2 Crafting Bench"
+            }
+        },
+        furnace: {
+            1: {
+                title: "Clay Furnace",
                 requiredMaterial: {
                     clay: 3,
                     straw: 0,
                     sand: 0,
+                    stick: 0,
                     // water? bucket
                     bellows: 0
                 },
-                requiredTools: ["bucket"]
+                requiredUnlock: {
+                    structure: "firePit"
+                }, // minerals
             },
-            crucibleFurnace: {
-                title: "Crucible Furnace",
-                requiredMaterial: {
-                    // crucible (clay/graphite)
-                }
+            2: {
+                title: "Bloomery Furnace"
+            },
+            3: {
+                title: "Crucible Furnace"
             }
-        }
+        },
     }
     // base: {
     //     materials: {

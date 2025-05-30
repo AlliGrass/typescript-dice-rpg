@@ -5,13 +5,18 @@ import { useInventoryStore } from "../stores/useInventoryStore"
 const InventoryWindow = () => {
     const playerInventory = useInventoryStore()
     const {items: {resources}} = useDefaults() // resource exclusive
+
+    const allResources = { //util
+        ...resources.naturalMaterials,
+        ...resources.craftedMaterials
+    }
     // const playerInventory = usePlayerStore((state: PlayerState) => state.inventory)
 
     const showItem = (inventorySection: Object, itemtype?: any) => { // useMemo
         return (
             <div>
                 {Object.entries(inventorySection).map(([key, value]) => {
-                    console.log("inventory rerender")
+                    // console.log("inventory rerender")     optimise at later date  (Memo) 
                     if (typeof value === "object") {
                         return (
                             <>
@@ -23,10 +28,10 @@ const InventoryWindow = () => {
                     if (value != 0 && typeof value === "number") {
                         const resource = key + itemtype.charAt(0).toUpperCase() + itemtype.slice(1)
                         let itemTitle
-                        if (resources[key]) { // resource exclusive
-                            itemTitle = resources[key].title
-                        } else if (resources[resource]) { // resource exclusive
-                            itemTitle = resources[resource].title
+                        if (allResources[key]) { // resource exclusive
+                            itemTitle = allResources[key].title
+                        } else if (allResources[resource]) { // resource exclusive
+                            itemTitle = allResources[resource].title
                         }
                         return <p>{itemTitle + ": " + value}</p>
                     }

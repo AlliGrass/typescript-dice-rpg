@@ -6,49 +6,62 @@ const CraftingWindow = () => {
 
     const {items: { resources, tools } } = useDefaults()
 
+    const allResources = { //util
+        ...resources.naturalMaterials,
+        ...resources.craftedMaterials
+    }
+
     const inventory = useInventoryStore()
     const { inventoryAddItem } = useInventoryStore()
 
-    const addItemFunction = (itemID: string, requiredItems: [key: string]) => {
-        // const itemAdded = {
-        //     [itemID]: tools[itemID] 
-        // }
-        const { crafting, ...toolDetails} = tools[itemID]
-        const itemAdded = {
-            [itemID]: toolDetails
-        }
+    const addItemFunction = (toolType: string, itemDetails: Object) => {
 
-        const materialCost = Object.assign({}, ...Object.entries(requiredItems).map(([material, amount]) => {
+     
+        // const { crafting, ...toolDetails} = tools[itemID]
+        // const itemAdded = {
+        //     [itemID]: toolDetails
+        // }
+
+        // // title: "",
+        // //     tier: 0,
+        // //     condition: "",
+        // //     durability: 0
+        console.log(itemDetails)
+
+        const materialCost = Object.assign({}, ...Object.entries(itemDetails.crafting.requiredMaterial).map(([material, amount]) => {
             return {
                 [material]: {
-                    path: resources[material].path,
+                    path: allResources[material].path,
                     amount: amount
                 }
             }
         }))
-        inventoryAddItem(itemAdded, materialCost)
+        inventoryAddItem(toolType, itemDetails, materialCost)
     }
-
 
     const getMaterialAmount = (resource: string): number => {
 
-        const path = resources[resource].path
+        const path = allResources[resource].path
         // console.log(path)
         let currentPath: any = inventory
         for (const nextPosition of path) {
             currentPath = currentPath[nextPosition]
         }
-        return currentPath[resources[resource].itemKey]
-
+        return currentPath[allResources[resource].itemKey]
     }
 
     const getUnlocked = (type: any, required: any): boolean => {
 
-        const result = Object.keys(inventory[type]).includes(required) // tool specific | not applicable to structures
-
+        console.log(type)
+        console.log(required)
+        if (type === "tool") console.log(inventory[type])
+        if (type !== "tool") console.log(inventory.structure[type])
+        const result = type === "tool" ? Object.keys(inventory[type]).includes(required) : inventory.structure[type].tier >= required
 
         return result
     }
+
+
 
 
     return (
@@ -57,36 +70,67 @@ const CraftingWindow = () => {
             <div style={{
                 "display": "flex"
             }}>
-                {Object.entries(tools).map(([itemObject, itemObjectValues]) => {
-                    // const [craftingAvailable, setCraftingAvailable] = useState<boolean>(true)
-
-                    const craftingAvailable = useMemo(() => (
-                        itemObjectValues.crafting.requiredUnlock? Object.entries(itemObjectValues.crafting.requiredUnlock).every(([type, required]) => getUnlocked(type, required)) : true
-                    ), [inventory])
-                    // itemObjectValues.crafting.requiredUnlock ? Object.entries(itemObjectValues.crafting.requiredUnlock).every(([type, required]) => getUnlocked(type, required)) : true
 
 
+                {
+                    Object.entries(tools).map(([toolType, toolTiers]) => {
+                        const nextUpgrade = toolTiers[inventory.tool[toolType].tier + 1]
 
-                    const materialsAvailable = useMemo(() => (
-                        Object.entries(itemObjectValues.crafting.requiredMaterial).every(([resource, required]) => getMaterialAmount(resource) >= required) // every returns boolean if all are true
-                    ), [inventory])
+
+                        const craftingAvailable = useMemo(() => (
+                            nextUpgrade.crafting.requiredUnlock? Object.entries(nextUpgrade.crafting.requiredUnlock).every(([type, required]) => getUnlocked(type, required)) : true
+                        ), [inventory])
 
 
-                    return (
-                        <div style={{
-                            "display": craftingAvailable? "block" : "none"
-                        }}>
-                            <h2>{itemObjectValues.title}</h2>
-                            <h3>Required Items</h3>
-                            {Object.entries(itemObjectValues.crafting.requiredMaterial).map(([material, amount]) => {
-                                return (
-                                    <p>{material + ": " + amount}</p> // material names not titled | item keys
-                                )
-                            })}
-                            <button disabled={(!materialsAvailable || inventory.tool[itemObject])} onClick={() => addItemFunction(itemObject, itemObjectValues.crafting.requiredMaterial)}>Craft Item</button>
-                        </div>
-                    )
-                })}
+                        const materialsAvailable = useMemo(() => (
+                            Object.entries(nextUpgrade.crafting.requiredMaterial).every(([resource, required]) => getMaterialAmount(resource) >= required) // every returns boolean if all are true
+                        ), [inventory])
+
+
+                        return (
+                            <div style={{
+                                "display": craftingAvailable? "block" : "none"
+                            }}>
+                                <h2>{nextUpgrade.title}</h2>
+                                <h3>Required Items</h3>
+                                {Object.entries(nextUpgrade.crafting.requiredMaterial).map(([material, amount]) => {
+                                    const materialTitle = allResources[material].title
+                                    return <p>{materialTitle + ": " + amount}</p>
+                                })}
+                                <button disabled={!materialsAvailable} onClick={() => addItemFunction(toolType, nextUpgrade)}>Craft Item</button>
+                            </div>
+                        )
+                    })
+                }
+
+                
+            </div>
+
+            <h1>Crafting Resources</h1>
+
+            <div style={{
+                "display": "flex"
+            }}>
+
+                {
+                    Object.entries(resources.craftedMaterials).map(([materialKey, materialDetails]) => {
+
+                        const materialsAvailable = false
+
+                        return (
+                            <div>
+                                <h2>{materialDetails.title}</h2>
+                                <h3>Required Items</h3>
+                                {Object.entries(materialDetails.requiredMaterial).map(([material, amount]) => {
+                                    const materialTitle = allResources[material].title
+                                    return <p>{materialTitle + ": " + amount}</p>
+                                })}
+                                <button disabled={!materialsAvailable}>Craft Resource</button>
+                            </div>
+                        )
+                    })
+                }
+
             </div>
             
         </div>
